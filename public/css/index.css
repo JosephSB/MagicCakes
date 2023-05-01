@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: white;
+    --bg-color-secondary: #F5F5F5;
+    --color-primary: #161616;
+    --color-primary-hover: #161616db;
+    --text-color: white;
+    --color-secondary: #8E8E8E;
+    --font-primary:'Poppins';
+    --font-secondary:'Rubik';
+}
+
+body {
+    background-color: var(-bg-color);
+    height: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    width: 100%;
+    font-family: var(--font-primary), sans-serif;
+}
