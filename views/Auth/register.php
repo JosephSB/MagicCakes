@@ -8,9 +8,7 @@ $BASE_URL = constant('URL') . "public";
 
 <head>
     <?php require 'views/components/head.php';  ?>
-    <meta charset="UTF-8">
     <title>Registrate | Magic Cakes</title>
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="<?php echo  $BASE_URL; ?>/css/login.css">
 </head>
 

@@ -5,15 +5,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php require 'views/components/head.php';  ?>
     <title>Magic Cakes</title>
+    <link rel="stylesheet" href="<?php echo  $BASE_URL; ?>/css/home.css">
 </head>
 <body>
-    Hola mkekes
-    <p>Holiiiii</p>
-    keyla, mi primer commit 
-    <p>ESTE AÑO CAMPEONA LA U, DALE CREMA!!!!</p>
-    <h1>GAAAAAAAAAAAAAA  LA 27, DALE BARRA CREMA!!!!</h1>
-    <h1>LA U ES LA U </h1>
-    <p>U CAMPEON SUDAMERICANA 2023</p>
+    <header></header>
+    <div class="main-container">
+        <div class="slider">
+            <div class="slider-images" id="imagesSlider">
+                
+            </div>
+            <div class="slider-items" id="itemsSlider">
+
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="<?php echo $BASE_URL; ?>/js/sliderHome.js"></script>
 </body>
 </html>
