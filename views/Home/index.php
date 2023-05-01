@@ -13,12 +13,16 @@
     <header></header>
     <div class="main-container">
         <div class="slider">
-            <div class="slider-images" id="imagesSlider">
-                
+            <div class="container-slider-images" id="ContainerImagesSlider">
+                <div class="slider-images-box box-prev" id="boxPrevSlider">
+                    <i class="fa-solid fa-caret-left fa-2x"></i>
+                </div>
+                <div class="slider-images-box box-next" id="boxNextSlider">
+                    <i class="fa-solid fa-caret-right fa-2x"></i>
+                </div>
+                <div class="slider-images" id="imagesSlider"></div>
             </div>
-            <div class="slider-items" id="itemsSlider">
-
-            </div>
+            <div class="slider-items" id="itemsSlider"></div>
         </div>
     </div>
     <footer></footer>
