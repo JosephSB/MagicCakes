@@ -1,6 +1,6 @@
 <?php
 
-    define('URL', 'http://localhost/MagicCakes/');
+    define('URL', 'http://localhost:8080/MagicCakes/');
     //-------------DB--------------
     define('HOST', 'localhost');
     define('DB', 'minispotify');

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo  $BASE_URL; ?>/css/home.css">
 </head>
 <body>
-    <header></header>
+    <?php require 'views/components/header.php';  ?>
     <div class="main-container">
         <div class="slider">
             <div class="container-slider-images" id="ContainerImagesSlider">
@@ -25,7 +25,7 @@
             <div class="slider-items" id="itemsSlider"></div>
         </div>
     </div>
-    <footer></footer>
+    <?php require 'views/components/footer.php';  ?>
     <script src="<?php echo $BASE_URL; ?>/js/sliderHome.js"></script>
 </body>
 </html>
