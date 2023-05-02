@@ -167,6 +167,11 @@ body {
     list-style: none;
 }
 
+.header img {
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
 .header .icon-right{
     align-items: center;
     justify-content: center;
