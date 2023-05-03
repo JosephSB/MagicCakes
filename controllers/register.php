@@ -7,8 +7,13 @@
         }
 
         function render(){
-
+            session_start();
             $data = $_POST;
+
+            if(isset($_SESSION['user_id'])){
+                header("Location: ".constant('URL')."");
+            }
+
             if(empty($data['name']) || empty($data['password']) ){
                 $this->view->message = '';
                 $this->view->Render('Auth/register');
@@ -17,12 +22,6 @@
 
             $validate = new ValidateCredentials();
             $this->loadModel("user");
-
-            session_start();
-
-            if(isset($_SESSION['user_id'])){
-                header("Location: ".constant('URL')."");
-            }
 
             if($validate -> validateUser($data['name']) == false){
                 $this->view->message = 'Nombre invalido';

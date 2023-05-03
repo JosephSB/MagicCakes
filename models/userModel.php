@@ -28,8 +28,42 @@
                 ]);
                 return true;
             } catch (PDOException $e) {
-                echo $e;
+                //echo $e;
                 return false;
+            }
+        }
+
+        public function findUserByEmail($email){
+            try {
+                $query = $this->db->connect()->prepare(
+                    '
+                        SELECT * FROM users WHERE email = :email and status = 1
+                    '
+                );
+                $query->execute([
+                    'email' => $email,
+                ]);
+
+                while($row = $query->fetch()){
+                    $products = array(
+                        'user_id' => $row['user_id'],
+                        'role' => $row['role'],
+                        'name' => $row['name'],
+                        'lastname' => $row['lastname'],
+                        'email' => $row['email'],
+                        'phone' => $row['phone'],
+                        'address' => $row['address'],
+                        'password' => $row['password'],
+                        'status' => $row['status'],
+                        'urlProfile' => $row['urlProfile'],
+                    );
+                    return $products;
+                }
+
+                return [];
+            } catch (PDOException $e) {
+                //echo $e;
+                return [];
             }
         }
     }
