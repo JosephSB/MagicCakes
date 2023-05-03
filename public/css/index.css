@@ -30,6 +30,11 @@ body {
     margin: 0 auto;
     margin-top: 0px;
 }
+.text-error{
+    margin: 5px 0;
+    color: firebrick;
+    font-size: 12px;
+}
 
 .footer{
     

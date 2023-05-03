@@ -13,7 +13,7 @@ $BASE_URL = constant('URL') . "public";
 </head>
 
 <body>
-    <form class="formulario">
+    <form class="formulario" action="<?php echo  constant('URL'); ?>register" method="POST">
         <div class="contenedor">
             <div style="text-align: center;">
                 <a href="<?php echo  constant('URL'); ?>">
@@ -22,33 +22,28 @@ $BASE_URL = constant('URL') . "public";
             </div>
 
             <div class="input-contenedor">
-                <input type="email" placeholder="Correo Electronico">
-
+                <input type="email" placeholder="Correo Electronico" name="email" require>
             </div>
 
             <div class="input-contenedor">
-                <input type="text" placeholder="Direccion">
-
+                <input type="text" placeholder="Direccion" name="address" require>
             </div>
 
             <div class="input-contenedor">
-                <input type="text" placeholder="Nombre">
-
+                <input type="text" placeholder="Nombre" name="name" require>
             </div>
 
             <div class="input-contenedor">
-                <input type="text" placeholder="Apellido">
-
+                <input type="text" placeholder="Apellido" name="lastname" require>
             </div>
             <div class="input-contenedor">
-                <input type="number" placeholder="Celular">
-
+                <input type="number" placeholder="Celular" name="number" require>
             </div>
             <div class="input-contenedor">
-                <input type="password" placeholder="Contraseña">
-
+                <input type="password" placeholder="Contraseña" name="password" require>
             </div>
-            <input type="submit" value="Registrarme" class="button">
+            <input type="submit" value="REGISTRARME" class="button">
+            <p class="text-error"><?php echo $this->message; ?></p>
             <p>¿Ya tienes una cuenta? <a class="link" href="<?php echo  constant('URL'); ?>login">Inicia Sesion </a></p>
         </div>
     </form>
