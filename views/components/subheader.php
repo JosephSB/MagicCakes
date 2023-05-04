@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $USERNAME = $_SESSION['username'];
+    $USERNAME = isset($_SESSION['username']) ? $_SESSION['username'] : NULL;
 ?>
 
 

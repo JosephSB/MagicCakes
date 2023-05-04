@@ -26,43 +26,11 @@
             <div class="slider-items" id="itemsSlider"></div>
         </div>
         <div class="container-offers">
-            <p class="title-offers">Nuestros productos favoritos</p>
-            <div class="container-cards-offers">
-                <div class="card-product">
-                    <div class="card-product-containerImg">
-                        <i class="fa-regular fa-heart card-product-icon"></i>
-                        <img class="card-product-img" src="https://dxnn4n4cam0ol.cloudfront.net/media/catalog/product/b/a/bajas_bz1a6356_1.jpg">
-                    </div>
-                    <div class="card-product-body">
-                        <p class="card-product-title">Magic red velvet</p>
-                        <p class="card-product-description">3 discos de keke red velvet, relleno de un mix de frosting de queso crema con chantillí , 2 capas de fudge , frambuesas y blueberries . 4 porciones aprox. 11 cm de diámetro.</p>
-                        <p class="card-product-price">s/99.00</p>
-                        <button class="card-product-btn">COMPRAR</button>
-                    </div>
-                </div>
-                <div class="card-product">
-                    <div class="card-product-containerImg">
-                        <i class="fa-regular fa-heart card-product-icon"></i>
-                        <img class="card-product-img" src="https://dxnn4n4cam0ol.cloudfront.net/media/catalog/product/b/a/bajas_bz1a6356_1.jpg">
-                    </div>
-                    <div class="card-product-body">
-                        <p class="card-product-title">Magic red velvet</p>
-                        <p class="card-product-description">3 discos de keke red velvet, relleno de un mix de frosting de queso crema con chantillí , 2 capas de fudge , frambuesas y blueberries . 4 porciones aprox. 11 cm de diámetro.</p>
-                        <p class="card-product-price">s/99.00</p>
-                        <button class="card-product-btn">COMPRAR</button>
-                    </div>
-                </div>
-                <div class="card-product">
-                    <div class="card-product-containerImg">
-                        <i class="fa-regular fa-heart card-product-icon"></i>
-                        <img class="card-product-img" src="https://dxnn4n4cam0ol.cloudfront.net/media/catalog/product/b/a/bajas_bz1a6356_1.jpg">
-                    </div>
-                    <div class="card-product-body">
-                        <p class="card-product-title">Magic red velvet</p>
-                        <p class="card-product-description">3 discos de keke red velvet, relleno de un mix de frosting de queso crema con chantillí , 2 capas de fudge , frambuesas y blueberries . 4 porciones aprox. 11 cm de diámetro.</p>
-                        <p class="card-product-price">s/99.00</p>
-                        <button class="card-product-btn">COMPRAR</button>
-                    </div>
+            <p class="title-offers">Nuestros productos populares</p>
+            <div class="container-cards-offers" id="containerProducts">
+                <div class="containerLoader" id="loader">
+                    <div class="loader"></div>
+                    <p>Cargando Productos</p>
                 </div>
             </div>
             <a href="<?php echo constant('URL')?>products">
@@ -97,5 +65,6 @@
     </div>
     <?php require 'views/components/footer.php';  ?>
     <script src="<?php echo $BASE_URL; ?>/js/sliderHome.js"></script>
+    <script src="<?php echo $BASE_URL; ?>/js/ListPopularProducts.js"></script>
 </body>
 </html>

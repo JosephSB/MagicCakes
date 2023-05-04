@@ -22,7 +22,7 @@
             $this->loadModel("user");
 
             $user = $this->model->findUserByEmail($data['email']);
-            echo password_verify($data['password'], $user['password']);
+
             if(empty($user) == false){
                 if(password_verify($data['password'], $user['password'])){
                     $_SESSION['user_id'] = $user['user_id'];
