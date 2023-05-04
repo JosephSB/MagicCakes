@@ -5,15 +5,19 @@
             parent::__construct();
         }
 
-        public function getAllProducts(/*$filters*/)
+        public function getAllProducts($ORDER, $SEARCHTEXT)
         {
             try {
-                $query = $this->db->connect()->prepare(
-                    'SELECT * FROM products p WHERE p.status = 1'
-                );
+                $sWhere = "";
+                $sOrder = "";
+                if($ORDER == "2") $sOrder = "ORDER BY price asc";
+                if($ORDER == "3") $sOrder = "ORDER BY price desc";
+                if($SEARCHTEXT) $sWhere = "and title like "."'%".$SEARCHTEXT."%'";
+                $querySQL = 'SELECT * FROM products p WHERE p.status = 1'.' '.$sWhere.' '.$sOrder;
+                $query = $this->db->connect()->prepare($querySQL);
                 $query->execute(/*[
-                    'user'=>$user,
-                    'pass'=> md5($pass)
+                    'order'=> $ORDER,
+                    'txt'=> $SEARCHTEXT
                 ]*/);
                 $arr_products = array();
                 while($row = $query->fetch()){

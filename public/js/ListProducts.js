@@ -1,11 +1,17 @@
 const ContainerProducts = document.getElementById("containerProducts");
 const Loader = document.getElementById("loader");
+const inputRange = document.getElementById("inputRange");
+const inputRangeName = document.getElementById("inputRangeName");
+const inputRangeOptions = document.getElementById("inputRangeOptions");
+const BtnSearch = document.getElementById("BtnSearch");
+const inputSearch = document.getElementById("inputSearch");
 const URL_WEB = "http://localhost/MagicCakes";
 
 
-const GetProducts = async () => {
+const GetProducts = async (filters) => {
     const options = {
-        method: "GET",
+        method: "POST",
+        body: filters ? JSON.stringify(filters) : JSON.stringify({}),
         headers: {
             "Content-Type": "application/json"
         },
@@ -24,12 +30,39 @@ const GetProducts = async () => {
     }
 }
 
-const DrawProducts = async () => {
-    const data = await GetProducts()
+const DrawProducts = async (filters) => {
+    ContainerProducts.innerHTML= ""
+    Loader.style.display = "flex"
+    const data = await GetProducts(filters)
     if(data.length === 0)  ContainerProducts.innerHTML += `<p class="title-noproducts">Sin productos</p>`
     data.map( (product) =>  ContainerProducts.innerHTML += CardProduct(product.urllmage,product.title,product.description, product.price, product.id ) )
 }
 
+let OrderProduct = 0;
+let SearchValue = "";
+
+inputRange.addEventListener("click", (e) => {
+    inputRangeOptions.style.display= inputRangeOptions.style.display === "none" ? "inline-block" : "none"
+} )
+
+inputRangeOptions.addEventListener("click", (e) => {
+    const value = e.target.id.slice(-1);
+    inputRangeName.innerText = e.target.innerText;
+    inputRange.dataset.value=value;
+    DrawProducts({
+        order: value,
+        search: SearchValue
+    })
+    OrderProduct = value;
+})
+
+BtnSearch.addEventListener("click", (e) => {
+    DrawProducts({
+        order: OrderProduct,
+        search: inputSearch.value
+    })
+    SearchValue = inputSearch.value;
+} )
 
 
 DrawProducts()
