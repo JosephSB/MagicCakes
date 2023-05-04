@@ -8,7 +8,7 @@
                 <a href="<?php echo  constant('URL'); ?>aboutUs">Contactanos</a>
             </div>
             <div class="element">
-                <a href="<?php echo  constant('URL'); ?>aboutUs">Terminos y Condiciones</a>
+                <a href="<?php echo  constant('URL'); ?>termCondition">Terminos y Condiciones</a>
             </div>
             <div class="element">
                 <a href="<?php echo  constant('URL'); ?>aboutUs">Reclamaciones</a>
