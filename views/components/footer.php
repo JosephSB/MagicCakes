@@ -2,16 +2,16 @@
     <div class="footer-all-elements">
         <div class="footer-elements-left">
             <div class="element">
-                <a href="">Nosotros</a>
+                <a href="<?php echo  constant('URL'); ?>aboutUs">Nosotros</a>
             </div>
             <div class="element">
-                <a href="">Contactanos</a>
+                <a href="<?php echo  constant('URL'); ?>aboutUs">Contactanos</a>
             </div>
             <div class="element">
-                <a href="">Terminos y Condiciones</a>
+                <a href="<?php echo  constant('URL'); ?>aboutUs">Terminos y Condiciones</a>
             </div>
             <div class="element">
-                <a href="">Reclamaciones</a>
+                <a href="<?php echo  constant('URL'); ?>aboutUs">Reclamaciones</a>
             </div>
         </div>
 
