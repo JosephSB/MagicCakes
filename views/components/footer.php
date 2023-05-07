@@ -5,7 +5,7 @@
                 <a href="<?php echo  constant('URL'); ?>aboutUs">Nosotros</a>
             </div>
             <div class="element">
-                <a href="<?php echo  constant('URL'); ?>aboutUs">Contactanos</a>
+                <a href="<?php echo  constant('URL'); ?>contact">Contactanos</a>
             </div>
             <div class="element">
                 <a href="<?php echo  constant('URL'); ?>termCondition">Terminos y Condiciones</a>
