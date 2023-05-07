@@ -9,10 +9,6 @@
         function render(){
             $data = $_POST;
 
-            if(isset($_SESSION['user_id'])){
-                header("Location: ".constant('URL')."");
-            }
-
             if(empty($data['name']) ){
                 $this->view->message = '';
                 $this->view->Render('Contact');
