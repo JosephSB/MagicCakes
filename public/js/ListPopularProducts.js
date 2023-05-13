@@ -1,6 +1,6 @@
 const ContainerProducts = document.getElementById("containerProducts");
 const Loader = document.getElementById("loader");
-const URL_WEB = "http://localhost/MagicCakes";
+const URL_WEB = "http://localhost:8080/MagicCakes/";
 
 
 const GetPopularProducts = async () => {
@@ -45,7 +45,7 @@ const CardProduct = (image, title, description, price, id) => {
                 <p class="card-product-title">${title}</p>
                 <p class="card-product-description">${description.length > 100 ? description.slice(0,100)+"..." : description}</p>
                 <p class="card-product-price">${formatoMonedaSoles(price)}</p>
-                <a href="${URL_WEB}/products/${id}">
+                <a href="${URL_WEB}/products/detail/${id}">
                     <button class="card-product-btn">COMPRAR</button>
                 </a>
             </div>

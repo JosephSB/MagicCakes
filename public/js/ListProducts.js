@@ -5,7 +5,7 @@ const inputRangeName = document.getElementById("inputRangeName");
 const inputRangeOptions = document.getElementById("inputRangeOptions");
 const BtnSearch = document.getElementById("BtnSearch");
 const inputSearch = document.getElementById("inputSearch");
-const URL_WEB = "http://localhost/MagicCakes";
+const URL_WEB = "http://localhost:8080/MagicCakes/";
 
 
 const GetProducts = async (filters) => {
@@ -17,7 +17,7 @@ const GetProducts = async (filters) => {
         },
     };
     try {
-        const res = await fetch(`${URL_WEB}/api/products/getAllProducts`, options)
+        const res = await fetch(`${URL_WEB}/api/products/getAllProducts`, options) /*NO ENTIENOD*/
         const data = await res.json()
         Loader.style.display = "none"
         if(data.status === 200 && data.operation === true){
@@ -78,7 +78,7 @@ const CardProduct = (image, title, description, price, id) => {
                 <p class="card-product-title">${title}</p>
                 <p class="card-product-description">${description.length > 100 ? description.slice(0,100)+"..." : description}</p>
                 <p class="card-product-price">${formatoMonedaSoles(price)}</p>
-                <a href="${URL_WEB}/products/${id}">
+                <a href="${URL_WEB}/products/detail/${id}">
                     <button class="card-product-btn">COMPRAR</button>
                 </a>
             </div>

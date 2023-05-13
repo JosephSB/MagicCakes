@@ -70,4 +70,35 @@
                 return [];
             }
         }
+
+        public function getDetailsProducts($id){
+
+            try {
+                $query = $this->db->connect()->prepare('SELECT * FROM products WHERE product_id = :id;');
+                $query->execute(['id' => $id]);
+                $arr_products = array();
+                while($row = $query->fetch()){
+                    $products = array(
+                        'id' => $row['product_id'],
+                        'title' => $row['title'],
+                        'description' => $row['description'],
+                        'urllmage' => $row['urllmage'],
+                        'price' => $row['price'],
+                        'status' => $row['status'],
+                        'updated' => $row['updated'],
+                        'created' => $row['created'],
+                    );
+                    array_push($arr_products, $products);
+                }
+                return $arr_products;
+
+            } catch (PDOException $e) {
+                //echo $e;
+                return [];
+            }
+
+        }
+
     }
+
+?>
