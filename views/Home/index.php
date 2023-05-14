@@ -65,6 +65,7 @@
     </div>
     <?php require 'views/components/footer.php';  ?>
     <script src="<?php echo $BASE_URL; ?>/js/sliderHome.js"></script>
+    <script src="<?php echo $BASE_URL; ?>/js/favorites.js"></script>
     <script src="<?php echo $BASE_URL; ?>/js/ListPopularProducts.js"></script>
 </body>
 </html>

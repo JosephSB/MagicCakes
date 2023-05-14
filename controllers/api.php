@@ -13,7 +13,8 @@
             require_once 'api/products.api.php';
             $controler = new productsApi();
             $controler->loadModel('products');
-            $controler-> {$params[0]}();
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
         }
 
     }

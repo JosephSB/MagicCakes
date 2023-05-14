@@ -1,6 +1,6 @@
 const ContainerProducts = document.getElementById("containerProducts");
 const Loader = document.getElementById("loader");
-const URL_WEB = "http://localhost:8080/MagicCakes/";
+const URL_WEB = "http://localhost/MagicCakes/";
 
 
 const GetPopularProducts = async () => {
@@ -27,18 +27,22 @@ const GetPopularProducts = async () => {
 const DrawPopularProducts = async () => {
     const data = await GetPopularProducts()
     if(data.length === 0)  ContainerProducts.innerHTML += `<p class="title-noproducts">Sin productos</p>`
-    data.map( (product) =>  ContainerProducts.innerHTML += CardProduct(product.urllmage,product.title,product.description, product.price, product.id ) )
+    data.map( (product) =>  ContainerProducts.innerHTML += CardProduct(product.urllmage,product.title,product.description, product.price, product.id, product.isFav ) )
+    listenAllBtnsFav()
 }
 
 
 
 DrawPopularProducts()
 
-const CardProduct = (image, title, description, price, id) => {
+const CardProduct = (image, title, description, price, id,isFav) => {
     return `
         <div class="card-product" data-productid="${id}">
             <div class="card-product-containerImg">
-                <i class="fa-regular fa-heart card-product-icon"></i>
+                ${isFav 
+                    ? `<i class="fa-solid fa-heart card-product-icon active" data-id="${id}"></i>`
+                    : `<i class="fa-regular fa-heart card-product-icon" data-id="${id}"></i>` 
+                }
                 <img class="card-product-img" src="${image}">
             </div>
             <div class="card-product-body">

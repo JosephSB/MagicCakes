@@ -1,104 +1,153 @@
-<?php 
+<?php
 
-    class productsModel extends Model{
-        function __construct(){
-            parent::__construct();
-        }
-
-        public function getAllProducts($ORDER, $SEARCHTEXT)
-        {
-            try {
-                $sWhere = "";
-                $sOrder = "";
-                if($ORDER == "2") $sOrder = "ORDER BY price asc";
-                if($ORDER == "3") $sOrder = "ORDER BY price desc";
-                if($SEARCHTEXT) $sWhere = "and title like "."'%".$SEARCHTEXT."%'";
-                $querySQL = 'SELECT * FROM products p WHERE p.status = 1'.' '.$sWhere.' '.$sOrder;
-                $query = $this->db->connect()->prepare($querySQL);
-                $query->execute(/*[
-                    'order'=> $ORDER,
-                    'txt'=> $SEARCHTEXT
-                ]*/);
-                $arr_products = array();
-                while($row = $query->fetch()){
-                    $products = array(
-                        'id' => $row['product_id'],
-                        'title' => $row['title'],
-                        'description' => $row['description'],
-                        'urllmage' => $row['urllmage'],
-                        'price' => $row['price'],
-                        'status' => $row['status'],
-                        'updated' => $row['updated'],
-                        'created' => $row['created'],
-                    );
-                    array_push($arr_products, $products);
-                }
-                return $arr_products;
-            } catch (PDOException $e) {
-                //echo $e;
-                return [];
-            }
-        }
-
-        public function getPopularProducts(/*$filters*/)
-        {
-            try {
-                $query = $this->db->connect()->prepare(
-                    'SELECT * FROM products p WHERE p.status = 1 LIMIT 3;'
-                );
-                $query->execute(/*[
-                    'user'=>$user,
-                    'pass'=> md5($pass)
-                ]*/);
-                $arr_products = array();
-                while($row = $query->fetch()){
-                    $products = array(
-                        'id' => $row['product_id'],
-                        'title' => $row['title'],
-                        'description' => $row['description'],
-                        'urllmage' => $row['urllmage'],
-                        'price' => $row['price'],
-                        'status' => $row['status'],
-                        'updated' => $row['updated'],
-                        'created' => $row['created'],
-                    );
-                    array_push($arr_products, $products);
-                }
-                return $arr_products;
-            } catch (PDOException $e) {
-                //echo $e;
-                return [];
-            }
-        }
-
-        public function getDetailsProducts($id){
-
-            try {
-                $query = $this->db->connect()->prepare('SELECT * FROM products WHERE product_id = :id;');
-                $query->execute(['id' => $id]);
-                $arr_products = array();
-                while($row = $query->fetch()){
-                    $products = array(
-                        'id' => $row['product_id'],
-                        'title' => $row['title'],
-                        'description' => $row['description'],
-                        'urllmage' => $row['urllmage'],
-                        'price' => $row['price'],
-                        'status' => $row['status'],
-                        'updated' => $row['updated'],
-                        'created' => $row['created'],
-                    );
-                    array_push($arr_products, $products);
-                }
-                return $arr_products;
-
-            } catch (PDOException $e) {
-                //echo $e;
-                return [];
-            }
-
-        }
-
+class productsModel extends Model
+{
+    function __construct()
+    {
+        parent::__construct();
     }
 
-?>
+    public function getAllProducts($ORDER, $SEARCHTEXT,$userID)
+    {
+        try {
+            $sWhere = "";
+            $sOrder = "";
+            if ($ORDER == "2") $sOrder = "ORDER BY p.price asc";
+            if ($ORDER == "3") $sOrder = "ORDER BY p.price desc";
+            if ($SEARCHTEXT) $sWhere = "and p.title like " . "'%" . $SEARCHTEXT . "%'";
+            $querySQL = '
+                SELECT 
+                    p.product_id, p.title, p.description, p.urllmage, p.price, p.status, p.updated, p.created,
+                    IF(COUNT(pf.product_id) > 0, true, false) AS isFav
+                FROM products p 
+                LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
+                WHERE p.status = 1' . ' ' . $sWhere . ' GROUP BY p.product_id ' . $sOrder;
+            $query = $this->db->connect()->prepare($querySQL);
+            $query->execute([
+                'userID'=> $userID
+            ]);
+            $arr_products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'id' => $row['product_id'],
+                    'title' => $row['title'],
+                    'description' => $row['description'],
+                    'urllmage' => $row['urllmage'],
+                    'price' => $row['price'],
+                    'status' => $row['status'],
+                    'updated' => $row['updated'],
+                    'created' => $row['created'],
+                    'isFav' => $row['isFav'],
+                );
+                array_push($arr_products, $products);
+            }
+            return $arr_products;
+        } catch (PDOException $e) {
+            //echo $e;
+            return [];
+        }
+    }
+
+    public function getPopularProducts($userID)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                SELECT 
+                    p.product_id, p.title, p.description, p.urllmage, p.price, p.status, p.updated, p.created,
+                    IF(COUNT(pf.product_id) > 0, true, false) AS isFav
+                FROM products p 
+                LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
+                WHERE p.status = 1 GROUP BY p.product_id LIMIT 3;
+                '
+            );
+            $query->execute([
+                'userID' => $userID,
+            ]);
+            $arr_products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'id' => $row['product_id'],
+                    'title' => $row['title'],
+                    'description' => $row['description'],
+                    'urllmage' => $row['urllmage'],
+                    'price' => $row['price'],
+                    'status' => $row['status'],
+                    'updated' => $row['updated'],
+                    'created' => $row['created'],
+                    'isFav' => $row['isFav'],
+                );
+                array_push($arr_products, $products);
+            }
+            return $arr_products;
+        } catch (PDOException $e) {
+            echo $e;
+            return [];
+        }
+    }
+
+    public function getDetailsProducts($id)
+    {
+
+        try {
+            $query = $this->db->connect()->prepare('SELECT * FROM products WHERE product_id = :id;');
+            $query->execute(['id' => $id]);
+            $arr_products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'id' => $row['product_id'],
+                    'title' => $row['title'],
+                    'description' => $row['description'],
+                    'urllmage' => $row['urllmage'],
+                    'price' => $row['price'],
+                    'status' => $row['status'],
+                    'updated' => $row['updated'],
+                    'created' => $row['created'],
+                );
+                array_push($arr_products, $products);
+            }
+            return $arr_products;
+        } catch (PDOException $e) {
+            //echo $e;
+            return [];
+        }
+    }
+
+    public function favProductByProductID($idProduct, $idUser)
+    {
+        $response["operation"] = false;
+        $response["isFav"] = null;
+        try {
+            $checkQuery = $this->db->connect()->prepare('SELECT COUNT(*) as count FROM products_favs WHERE product_id = :productID AND user_id = :userID');
+            $checkQuery->execute([
+                'productID' => $idProduct,
+                'userID' => $idUser,
+            ]);
+            $rowCount = $checkQuery->fetch(PDO::FETCH_ASSOC)['count'];
+
+            $response["isFav"] = false;
+
+            if ($rowCount > 0) {
+                $deleteQuery = $this->db->connect()->prepare('DELETE FROM products_favs WHERE product_id = :productID AND user_id = :userID');
+                $deleteQuery->execute([
+                    'productID' => $idProduct,
+                    'userID' => $idUser,
+                ]);
+                $response["isFav"] =  false;
+            } else {
+                $insertQuery = $this->db->connect()->prepare('INSERT INTO products_favs (product_id, user_id) VALUES (:productID, :userID)');
+                $insertQuery->execute([
+                    'productID' => $idProduct,
+                    'userID' => $idUser,
+                ]);
+                $response["isFav"] =  true;
+            }
+
+            $response["operation"] = true;
+            return $response;
+        } catch (PDOException $e) {
+            //echo $e;
+            return $response;
+        }
+    }
+}

@@ -5,7 +5,7 @@ const inputRangeName = document.getElementById("inputRangeName");
 const inputRangeOptions = document.getElementById("inputRangeOptions");
 const BtnSearch = document.getElementById("BtnSearch");
 const inputSearch = document.getElementById("inputSearch");
-const URL_WEB = "http://localhost:8080/MagicCakes/";
+const URL_WEB = "http://localhost/MagicCakes/";
 
 
 const GetProducts = async (filters) => {
@@ -35,7 +35,8 @@ const DrawProducts = async (filters) => {
     Loader.style.display = "flex"
     const data = await GetProducts(filters)
     if(data.length === 0)  ContainerProducts.innerHTML += `<p class="title-noproducts">Sin productos</p>`
-    data.map( (product) =>  ContainerProducts.innerHTML += CardProduct(product.urllmage,product.title,product.description, product.price, product.id ) )
+    data.map( (product) =>  ContainerProducts.innerHTML += CardProduct(product.urllmage,product.title,product.description, product.price, product.id,product.isFav ) )
+    listenAllBtnsFav()
 }
 
 let OrderProduct = 0;
@@ -67,11 +68,14 @@ BtnSearch.addEventListener("click", (e) => {
 
 DrawProducts()
 
-const CardProduct = (image, title, description, price, id) => {
+const CardProduct = (image, title, description, price, id,isFav) => {
     return `
         <div class="card-product" data-productid="${id}">
             <div class="card-product-containerImg">
-                <i class="fa-regular fa-heart card-product-icon"></i>
+                ${isFav 
+                    ? `<i class="fa-solid fa-heart card-product-icon active" data-id="${id}"></i>`
+                    : `<i class="fa-regular fa-heart card-product-icon" data-id="${id}"></i>` 
+                }
                 <img class="card-product-img" src="${image}">
             </div>
             <div class="card-product-body">
