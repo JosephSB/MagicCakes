@@ -1,5 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) { //AGREGUE PORQUE SE LLAMA ACA Y EN ORDERS
     session_start();
+}
     $USERNAME = isset($_SESSION['username']) ? $_SESSION['username'] : NULL;
 ?>
 

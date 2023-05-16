@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="product-image">
-                    <img src="<?php echo $this->product['urllmage']; ?>" alt="Product Image" />
+                    <img 00 alt="Product Image" />
                 </div>
             </section>
         </div>
