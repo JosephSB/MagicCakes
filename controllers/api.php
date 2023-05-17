@@ -17,6 +17,14 @@
             else $controler-> {$params[0]}($params);
         }
 
+        public function cart($params){
+            require_once 'api/shoppingCart.api.php';
+            $controler = new shoppingCartApi();
+            $controler->loadModel('shoppingCart');
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
+        }
+
     }
 
 ?>

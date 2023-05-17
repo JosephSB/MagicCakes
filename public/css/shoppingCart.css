@@ -1,0 +1,78 @@
+.card-title {
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+.shoppingcart-body{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.card {
+    background-color: #fefefe;
+    border: 2px solid #f0eded;
+    border-radius: 8px;
+    padding: 20px;
+    width: 25%;
+}
+
+.card-info {
+    width: 100%;
+}
+
+.card-info h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.card-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-info li {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.card-info span {
+    width: 30%;
+    font-size: 14px;
+
+}
+
+.card-info input[type="number"] {
+    width: 70%;
+    height: 32px;
+    font-size: 18px;
+    padding: 8px;
+    border: 1px solid #bfb9b9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-left: 16px;
+}
+
+.card-buy {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.card-buy button {
+    width: 100%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}

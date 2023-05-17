@@ -6,7 +6,8 @@
 <html lang="en">
     <head>
         <?php require 'views/components/head.php';  ?>
-        <title>Producto | Magic Cakes</title>
+        <title><?php echo $this->product['title']; ?> | Magic Cakes</title>
+        <meta name="description" content="<?php echo $this->product['description']; ?>">
         <link rel="stylesheet" href="<?php echo  $BASE_URL; ?>/css/detailProduct.css" />
     </head>
 
@@ -36,7 +37,7 @@
                     </div>
                 </div>
                 <div class="product-image">
-                    <img 00 alt="Product Image" />
+                    <img src="<?php echo $this->product['urllmage']; ?>" alt="Product Image" />
                 </div>
             </section>
         </div>

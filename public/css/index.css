@@ -21,7 +21,8 @@ body {
     margin: 0 auto;
     width: 100%;
     font-family: var(--font-primary), sans-serif;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .main-container {
@@ -76,7 +77,7 @@ body {
 }
 
 .footer {
-
+    margin-top: auto;
     background-color: var(--bg-color-secondary);
     padding: 0 25px;
 
