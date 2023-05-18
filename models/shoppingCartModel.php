@@ -18,7 +18,7 @@ class shoppingCartModel extends Model
                 FROM shopping_cart sc 
                 INNER JOIN products p on (p.product_id = sc.item_id)
                 LEFT JOIN products_favs pf ON (pf.product_id = p.product_id AND pf.user_id = :userID)
-                WHERE p.status = 1
+                WHERE p.status = 1 and sc.user_owner = :userID
                 GROUP BY p.product_id
             ';
             $query = $this->db->connect()->prepare($querySQL);
@@ -46,6 +46,94 @@ class shoppingCartModel extends Model
         } catch (PDOException $e) {
             //echo $e;
             return [];
+        }
+    }
+
+    public function findTotalProductsInShoppingCart($user_id)
+    {
+        try {
+            $querySQL = '
+                SELECT 
+	                count(*) as total
+                FROM shopping_cart sc 
+                INNER JOIN products p on (p.product_id = sc.item_id)
+                WHERE p.status = 1 and sc.user_owner = :userID
+            ';
+            $query = $this->db->connect()->prepare($querySQL);
+            $query->execute([
+                'userID'=> $user_id
+            ]);
+            $products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'total' => $row['total'],
+                );
+            }
+            return $products["total"];
+        } catch (PDOException $e) {
+            //echo $e;
+            return 0;
+        }
+    }
+
+    public function addItemToShoppingCart($user_id, $ammount, $item_id)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    INSERT INTO shopping_cart (item_id, user_owner, ammount, createdAt) 
+                    VALUES (:item_id, :user_owner, :ammount, CURRENT_TIME())
+                '
+            );
+            $query->execute([
+                'item_id'=> $item_id,
+                'user_owner'=> $user_id,
+                'ammount' => $ammount,
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            //echo $e;
+            return false;
+        }
+    }
+
+    public function updateItemFromShoppingCart($user_id, $ammount, $rowID)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    UPDATE shopping_cart SET ammount = :ammount
+                    WHERE user_owner=:userID and id=:ID
+                '
+            );
+            $query->execute([
+                'userID'=> $user_id,
+                'ID'=> $rowID,
+                'ammount' => $ammount,
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            //echo $e;
+            return false;
+        }
+    }
+
+    public function removeItemFromShoppingCart($user_id, $id)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    DELETE FROM shopping_cart WHERE user_owner=:userID and id=:ID
+                '
+            );
+            $query->execute([
+                'userID'=> $user_id,
+                'ID'=> $id
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            //echo $e;
+            return false;
         }
     }
 

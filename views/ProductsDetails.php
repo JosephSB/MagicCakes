@@ -24,7 +24,7 @@
                         <label for="cantidad">Cantidad</label>
                         <div class="cantidad-botones">
                             <button class="boton-cantidad" onclick="restarCantidad()">-</button>
-                            <input type="number" id="cantidad" name="cantidad" value="1" min="1" />
+                            <input type="number" id="cantidad" readonly value="1" min="1" />
                             <button class="boton-cantidad" onclick="sumarCantidad()">+</button>
                         </div>
                     </div>
