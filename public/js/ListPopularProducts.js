@@ -1,6 +1,5 @@
 const ContainerProducts = document.getElementById("containerProducts");
 const Loader = document.getElementById("loader");
-const URL_WEB = "http://localhost/MagicCakes/";
 
 
 const GetPopularProducts = async () => {

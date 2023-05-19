@@ -6,3 +6,6 @@
 <script src="https://kit.fontawesome.com/4c65d2cec0.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+<script src="<?php echo $BASE_URL; ?>/js/constants.js"></script>
+<script src="<?php echo $BASE_URL; ?>/js/Alert.js"></script>
+<script async  src="<?php echo $BASE_URL; ?>/js/cart.js"></script>

@@ -5,8 +5,6 @@ const inputRangeName = document.getElementById("inputRangeName");
 const inputRangeOptions = document.getElementById("inputRangeOptions");
 const BtnSearch = document.getElementById("BtnSearch");
 const inputSearch = document.getElementById("inputSearch");
-const URL_WEB = "http://localhost/MagicCakes/";
-
 
 const GetProducts = async (filters) => {
     const options = {

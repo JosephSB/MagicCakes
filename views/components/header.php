@@ -18,7 +18,7 @@
                 <i class="fa-regular fa-heart fa-lg" style="color: #000000;"></i>
             </a>
             <a href="<?php echo  constant('URL'); ?>mycart">
-                <i class="fa-sharp fa-solid fa-cart-shopping fa-lg" style="color: #000000;"></i>
+                <i class="fa-sharp fa-solid fa-cart-shopping fa-lg" style="color: #000000;"><span id="mycart" class="items-cart d-none">0</span></i>
             </a>
         </div>
     </nav>

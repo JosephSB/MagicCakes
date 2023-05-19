@@ -20,7 +20,33 @@ $BASE_URL = constant('URL') . "public";
             <h3>Carrito de compras</h3>
         </div>
         <div class="shoppingcart-body">
-        <div></div>
+            <div class="shoppingcart-listItems" id="container-items-shoppingcart">
+                <div class="containerLoader d-none" id="loader">
+                    <div class="loader"></div>
+                    <p>Cargando Productos</p>
+                </div>
+                <div class="shoppingcart-item">
+                    <img class="image" src="" alt="">
+                    <div class="body">
+                        <div class="body-1">
+                            <p class="title">GAAAAAAAA</p>
+                            <p class="price">s/ 99.00</p>
+                        </div>
+                        <div class="body-2">
+                            <p>cantidad</p>
+                            <div>
+                                <button class="boton-cantidad" id="btn-less">-</button>
+                                <input class="input-ammout" type="text" id="ammount" readonly value="1" min="1" />
+                                <button class="boton-cantidad" id="btn-add">+</button>
+                            </div>
+                        </div>
+                        <div class="body-2">
+                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa-regular fa-trash-can"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-info">
                     <h3>Resumen</h3>
@@ -52,6 +78,7 @@ $BASE_URL = constant('URL') . "public";
         </div>
     </div>
     <?php require 'views/components/footer.php';  ?>
+    <script src="<?php echo $BASE_URL; ?>/js/myCart.js"></script>
 </body>
 
 </html>

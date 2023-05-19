@@ -23,17 +23,17 @@
                     <div class="cantidad">
                         <label for="cantidad">Cantidad</label>
                         <div class="cantidad-botones">
-                            <button class="boton-cantidad" onclick="restarCantidad()">-</button>
-                            <input type="number" id="cantidad" readonly value="1" min="1" />
-                            <button class="boton-cantidad" onclick="sumarCantidad()">+</button>
+                            <button class="boton-cantidad" id="btn-less">-</button>
+                            <input type="number" id="ammount" readonly value="1" min="1" />
+                            <button class="boton-cantidad" id="btn-add">+</button>
                         </div>
                     </div>
                     <div class="buttons">
-                        <p class="price">
+                        <p class="price" id="finalPrice" data-init="<?php echo $this->product['price']; ?>">
                             S/
                             <?php echo $this->product['price']; ?>
                         </p>
-                        <button class="add-to-cart">Agregar al carrito</button>
+                        <button class="add-to-cart" id="btn-addToCart">Agregar al carrito</button>
                     </div>
                 </div>
                 <div class="product-image">
@@ -42,5 +42,6 @@
             </section>
         </div>
         <?php require 'views/components/footer.php';  ?>
+        <script async  src="<?php echo $BASE_URL; ?>/js/shoppingCart.js"></script>
     </body>
 </html>

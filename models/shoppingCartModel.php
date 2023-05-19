@@ -13,13 +13,10 @@ class shoppingCartModel extends Model
             $querySQL = '
                 SELECT 
 	                p.product_id, p.title, p.description, p.urllmage, p.price, p.status, p.updated, 		
-                    p.created, sc.user_owner, sc.ammount, sc.id as itemID, sc.createdAt as itemDate,
-                    IF(COUNT(pf.product_id) > 0, true, false) AS isFav
+                    p.created, sc.user_owner, sc.ammount, sc.id as itemID, sc.createdAt as itemDate
                 FROM shopping_cart sc 
                 INNER JOIN products p on (p.product_id = sc.item_id)
-                LEFT JOIN products_favs pf ON (pf.product_id = p.product_id AND pf.user_id = :userID)
                 WHERE p.status = 1 and sc.user_owner = :userID
-                GROUP BY p.product_id
             ';
             $query = $this->db->connect()->prepare($querySQL);
             $query->execute([
@@ -38,7 +35,6 @@ class shoppingCartModel extends Model
                     'status' => $row['status'],
                     'updated' => $row['updated'],
                     'created' => $row['created'],
-                    'isFav' => $row['isFav'],
                 );
                 array_push($arr_products, $products);
             }
