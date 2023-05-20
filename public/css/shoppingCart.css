@@ -108,9 +108,8 @@
 }
 
 .card {
-    background-color: #fefefe;
-    border: 2px solid #f0eded;
-    border-radius: 8px;
+    box-shadow: 0 4px 13px #e9e9f9;
+    border-radius: 10px;
     padding: 20px;
     width: 100%;
 }
@@ -133,25 +132,17 @@
 .card-info li {
     display: flex;
     align-items: center;
-    font-size: 18px;
+    justify-content: space-between;
+    font-size: 16px;
     margin-bottom: 8px;
 }
 
 .card-info span {
-    width: 30%;
     font-size: 14px;
-
 }
 
-.card-info input[type="number"] {
-    width: 70%;
-    height: 32px;
-    font-size: 18px;
-    padding: 8px;
-    border: 1px solid #bfb9b9;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-left: 16px;
+.card-info li p {
+    font-size: 12px;
 }
 
 .card-buy {

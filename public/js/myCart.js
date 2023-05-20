@@ -100,6 +100,17 @@ const ShoopingCartItem = (image, title, price, ammount, id) => {
     `
 }
 
+const calculateSummary = () => {
+    let summary = 0;
+    document.querySelectorAll(".price").forEach( item =>  summary += parseFloat(item.innerText.replace(/[^\d.-]/g, "")))
+
+
+    document.getElementById("grossPrice").innerText = formatoMonedaSoles(summary);
+    document.getElementById("shipmentPrice").innerText = formatoMonedaSoles(0);
+    document.getElementById("igv").innerText = formatoMonedaSoles(summary*0.18);
+    document.getElementById("totalPrice").innerText = formatoMonedaSoles(summary + (summary*0.18));
+}
+
 const ListenEachCartItem = () => {
     document.querySelectorAll(".fa-trash-can").forEach( itemTrash => {
         itemTrash.addEventListener("click", () => {
@@ -110,6 +121,7 @@ const ListenEachCartItem = () => {
                         document.querySelectorAll(".shoppingcart-item").forEach( item => item.dataset.id === idItem ? item.remove() : "" )
                         showAlert("Producto removido del carrito", "fa-solid fa-circle-check", "#55efc4")// esta funcion esta en alert.js
                         setItemsInCart()// esta funcion esta en cart.js
+                        calculateSummary()
                         return
                     }
                     showAlert("No se pudo remover el producto", "fa-solid fa-xmark", "#FF7675")
@@ -141,6 +153,7 @@ const ListenEachCartItem = () => {
 
             textPrice.innerText = formatoMonedaSoles(parseFloat(textPrice.dataset.unitprice) * newAmmount )
             inputAmmount.value = newAmmount;
+            calculateSummary()
             document.querySelectorAll(".boton-cantidad").forEach( item => item.dataset.id === idItem ? item.setAttribute("disabled", true) : "" )
             updateItemFromCart({id: idItem, ammount: newAmmount})
                 .finally( () => document.querySelectorAll(".boton-cantidad").forEach( item => item.dataset.id === idItem ? item.removeAttribute("disabled") : "" ) )
@@ -154,6 +167,7 @@ const DrawListItems = async () => {
     const {data, total} = await getItemsFromMyCart()
     if(data.length === 0)  ContainerItemShoppinCart.innerHTML += `<p class="title-noproducts">Sin productos en el carrito</p>`
     data.map( (item) =>  ContainerItemShoppinCart.innerHTML += ShoopingCartItem(item.urllmage,item.title, item.price,item.ammount, item.itemID ) )
+    calculateSummary()
     ListenEachCartItem()
 }
 

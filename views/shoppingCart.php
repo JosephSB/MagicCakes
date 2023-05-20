@@ -32,20 +32,20 @@ $BASE_URL = constant('URL') . "public";
                     <ul>
                         <li>
                             <span>Precio con IGV</span>
-                            <input type="number" placeholder="">
+                            <p id="grossPrice">0</p>
                         </li>
                         <li>
                             <span>Envio</span>
-                            <input type="number" placeholder="">
+                            <p id="shipmentPrice">0</p>
                         </li>
                         <li>
                             <span>IGV(18%)</span>
-                            <input type="number" placeholder="">
+                            <p id="igv">0</p>
                         </li>
                         <hr>
                         <li>
                             <span>Total de orden</span>
-                            <input type="number" placeholder="">
+                            <p id="totalPrice">0</p>
                         </li>
                         <hr>
                     </ul>
