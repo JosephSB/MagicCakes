@@ -29,29 +29,123 @@ const getItemsFromMyCart = async () => {
     }
 }
 
+const updateItemFromCart = async (data) => {
+    const options = {
+        method: "POST",
+        body: data ? JSON.stringify(data) : JSON.stringify({}),
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    try {
+
+        const res = await fetch(`${URL_WEB}/api/cart/updateProduct`, options) /*NO ENTIENOD*/
+        const data = await res.json()
+
+        if (data.status === 200 && data.operation === true) {
+            return true
+        }
+        return false
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
+
+const removeItemFromMyCart = async (ItemID) => {
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    try {
+
+        const res = await fetch(`${URL_WEB}/api/cart/removeProduct/${ItemID}`, options) /*NO ENTIENOD*/
+        const data = await res.json()
+
+        if (data.status === 200 && data.operation === true) {
+            return true
+        }
+        return false
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
+
+
 const ShoopingCartItem = (image, title, price, ammount, id) => {
     return `
-        <div class="shoppingcart-item">
+        <div class="shoppingcart-item" data-id="${id}">
             <img class="image" src="${image}" alt="${title}">
             <div class="body">
                 <div class="body-1">
                     <p class="title">${title}</p>
-                    <p class="price">${formatoMonedaSoles(price*ammount)}</p>
+                    <p class="price" data-id="${id}" data-unitPrice="${price}">${formatoMonedaSoles(price*ammount)}</p>
                 </div>
                 <div class="body-2">
                     <p>cantidad</p>
                     <div>
-                        <button class="boton-cantidad" id="btn-less">-</button>
-                        <input class="input-ammout" type="text" id="ammount" readonly value="${ammount}" min="1" />
-                        <button class="boton-cantidad" id="btn-add">+</button>
+                        <button class="boton-cantidad" data-action="less" data-id="${id}">-</button>
+                        <input class="input-ammout" type="text" data-id="${id}" readonly value="${ammount}" min="1" />
+                        <button class="boton-cantidad" data-action="more" data-id="${id}">+</button>
                     </div>
                 </div>
                 <div class="body-2">
-                    <i class="fa-regular fa-trash-can"></i>
+                    <i class="fa-regular fa-trash-can" data-id="${id}" ></i>
                 </div>
             </div>
         </div>
     `
+}
+
+const ListenEachCartItem = () => {
+    document.querySelectorAll(".fa-trash-can").forEach( itemTrash => {
+        itemTrash.addEventListener("click", () => {
+            const idItem = itemTrash.dataset.id;
+            removeItemFromMyCart(idItem)
+                .then( (resp) => {
+                    if(resp){
+                        document.querySelectorAll(".shoppingcart-item").forEach( item => item.dataset.id === idItem ? item.remove() : "" )
+                        showAlert("Producto removido del carrito", "fa-solid fa-circle-check", "#55efc4")// esta funcion esta en alert.js
+                        setItemsInCart()// esta funcion esta en cart.js
+                        return
+                    }
+                    showAlert("No se pudo remover el producto", "fa-solid fa-xmark", "#FF7675")
+                }  )
+        })
+    } )
+    document.querySelectorAll(".boton-cantidad").forEach( itemBtn => {
+        itemBtn.addEventListener("click", () => {
+            const idItem = itemBtn.dataset.id;
+            const action = itemBtn.dataset.action;
+            let inputAmmount = null;
+            let textPrice = null;
+            document.querySelectorAll(".input-ammout").forEach( item => {
+                if(item.dataset.id === idItem) inputAmmount = item
+            })
+            document.querySelectorAll(".price").forEach( item => {
+                if(item.dataset.id === idItem) textPrice = item
+            })
+
+            if(!inputAmmount || !textPrice) return
+
+            let newAmmount = parseInt(inputAmmount.value);
+
+            if(action === "more") newAmmount = newAmmount + 1
+
+            if(action === "less"){
+                if(newAmmount > 1) newAmmount = newAmmount - 1
+            }
+
+            textPrice.innerText = formatoMonedaSoles(parseFloat(textPrice.dataset.unitprice) * newAmmount )
+            inputAmmount.value = newAmmount;
+            document.querySelectorAll(".boton-cantidad").forEach( item => item.dataset.id === idItem ? item.setAttribute("disabled", true) : "" )
+            updateItemFromCart({id: idItem, ammount: newAmmount})
+                .finally( () => document.querySelectorAll(".boton-cantidad").forEach( item => item.dataset.id === idItem ? item.removeAttribute("disabled") : "" ) )
+        })
+    } )
 }
 
 const DrawListItems = async () => {
@@ -59,8 +153,8 @@ const DrawListItems = async () => {
     Loader.classList.remove = "d-none"
     const {data, total} = await getItemsFromMyCart()
     if(data.length === 0)  ContainerItemShoppinCart.innerHTML += `<p class="title-noproducts">Sin productos en el carrito</p>`
-    data.map( (item) =>  ContainerItemShoppinCart.innerHTML += ShoopingCartItem(item.urllmage,item.title, item.price,item.ammount, item.id ) )
-    //listenAllBtnsFav()
+    data.map( (item) =>  ContainerItemShoppinCart.innerHTML += ShoopingCartItem(item.urllmage,item.title, item.price,item.ammount, item.itemID ) )
+    ListenEachCartItem()
 }
 
 DrawListItems()

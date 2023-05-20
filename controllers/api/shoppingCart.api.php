@@ -83,7 +83,7 @@
 
             $user_id = $_SESSION['user_id'];
             $rowId = (!isset($id) || empty($id)) ? "" : $id;
-            if($this->model->addItemToShoppingCart($user_id, $rowId)){
+            if($this->model->removeItemFromShoppingCart($user_id, $rowId)){
                 echo $this->sendJson("producto eliminado exitosamente", true);
                 return;
             }
