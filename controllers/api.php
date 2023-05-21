@@ -25,6 +25,14 @@
             else $controler-> {$params[0]}($params);
         }
 
+        public function orders($params){
+            require_once 'api/orders.api.php';
+            $controler = new OrdersApi();
+            $controler->loadModel('orders');
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
+        }
+
     }
 
 ?>

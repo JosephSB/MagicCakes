@@ -51,7 +51,9 @@ $BASE_URL = constant('URL') . "public";
                     </ul>
                 </div>
                 <div class="card-buy">
-                    <button>COMPRAR</button>
+                    <a href="<?php echo  constant('URL'); ?>checkout">
+                        <button>COMPRAR</button>
+                    </a>
                 </div>
             </div>
         </div>

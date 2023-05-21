@@ -152,6 +152,17 @@
     margin-top: 24px;
 }
 
+.card-buy a {
+    width: 100%;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
 .card-buy button {
     width: 100%;
     background-color: #000000;

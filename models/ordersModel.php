@@ -53,6 +53,95 @@
                 return [];
             }
         }
+
+        public function saveOrder($user_id, $data){
+            try {
+                $query = $this->db->connect()->prepare(
+                    '
+                        INSERT INTO orders (order_id, client_id, status, paymentMethod, idPayment,totalGrossPrice,totalNetPrice,igv, shippingPrice,created) 
+                        VALUES (:order_id, :client_id, :status, :paymentMethod, :idPayment,:totalGrossPrice,:totalNetPrice,:igv, :shippingPrice, CURRENT_TIME())
+                    '
+                );
+                $queryDetail = $this->db->connect()->prepare(
+                    '
+                        INSERT INTO detail_orders ( order_id, name, lastname, address,detail_address,department,province, district,postalCode, phoneNumber) 
+                        VALUES (:order_id, :name, :lastname, :address,:detail_address,:department,:province, :district,:postalCode, :phoneNumber)
+                    '
+                );
+                $order_id ="O".substr(uniqid(),3,8).substr(uniqid(),0,2).substr(uniqid(),0,2);
+                $query->execute([
+                    'order_id' => $order_id,
+                    'client_id' => $user_id,
+                    "status" => 0,
+                    "paymentMethod" => "paypal",
+                    "idPayment" => uniqid(),
+                    "totalGrossPrice" => ($data["totalPrice"] - 10) / 1.18,
+                    "totalNetPrice" => $data["totalPrice"],
+                    "igv" => 0.18,
+                    "shippingPrice" => 10,
+
+                ]);
+                $queryDetail->execute([
+                    'order_id' => $order_id,
+                    'name' => $data["name"],
+                    "lastname" => $data["lastname"],
+                    "address" => $data["address"],
+                    "detail_address" => $data["detailAddress"],
+                    "department" => $data["department"],
+                    "province" => $data["province"],
+                    "district" => $data["district"],
+                    "postalCode" => $data["postalCode"],
+                    "phoneNumber" => $data["phoneNumber"],
+                ]);
+
+                // migrate products shopping cart to products order
+
+                $queryProductsInSC = $this->db->connect()->prepare(
+                    '
+                        SELECT 
+                            p.product_id, p.price, sc.ammount
+                        FROM shopping_cart sc 
+                        INNER JOIN products p on (p.product_id = sc.item_id)
+                        WHERE p.status = 1 and sc.user_owner = :userID
+                    '
+                );
+                $queryProductsInSC->execute([
+                    'userID' => $user_id
+                ]);
+
+                $bulkQuery = "INSERT INTO products_orders (order_id, product_id, ammount, unitPrice, created) VALUES ";
+                
+                $values = array();
+                $params = array();
+
+                while ($row = $queryProductsInSC->fetch()) {
+                    $values[] = "(?, ?, ?, ?, CURRENT_TIME())";
+                    $params[] = $order_id;
+                    $params[] = $row['product_id'];
+                    $params[] = $row['ammount'];
+                    $params[] = $row['price'];
+                }
+
+                $bulkQuery .= implode(", ", $values);
+                
+
+                $migrate = $this->db->connect()->prepare($bulkQuery);
+                $migrate->execute($params);
+
+                $deleteItemsCart = $this->db->connect()->prepare(
+                    'DELETE FROM shopping_cart WHERE user_owner = :user_id'
+                );
+                $deleteItemsCart->execute([
+                    'user_id' => $user_id
+                ]);
+
+                return true;
+            } catch (PDOException $e) {
+                //echo "Error de consulta SQL: " . $e->getMessage();
+                return true;
+            }
+        }
+
         private function formatSpanishDate($date){
             $englishMonths = array('January','February','March','April','May','June','July','August','September','October','November','December');
             $spanishMonths = array('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre');
@@ -61,5 +150,3 @@
         }
 
     }
-
-    ?>
