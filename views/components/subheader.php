@@ -15,7 +15,7 @@ if (session_status() === PHP_SESSION_NONE) { //AGREGUE PORQUE SE LLAMA ACA Y EN 
             <?php endif; ?>
             <p><a href="<?php echo  constant('URL'); ?>logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Logout</a></p>
         <?php else : ?>
-            <p><a href="<?php echo  constant('URL'); ?>register">Registrate</a></p>&nbsp;|&nbsp;<p><a href="<?php echo  constant('URL'); ?>login">Iniciar Session</a></p>
+            <p><a href="<?php echo  constant('URL'); ?>register">Registrate</a></p>&nbsp;|&nbsp;<p><a href="<?php echo  constant('URL'); ?>login">Iniciar Sesion</a></p>
         <?php endif; ?>
     </div>
 </div>

@@ -1,3 +1,6 @@
+.main-container{
+    padding: 15px;
+}
 .card-title {
     display: flex;
     justify-content: left;
@@ -6,15 +9,14 @@
 
 .shoppingcart-body{
     width: 100%;
-    display: grid;
-    grid-template-columns: 70% 30%;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
 }
 .shoppingcart-listItems{
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,7 +113,7 @@
     box-shadow: 0 4px 13px #e9e9f9;
     border-radius: 10px;
     padding: 20px;
-    width: 100%;
+    width: 30%;
 }
 
 .card-info {
@@ -173,3 +175,17 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
 }
+
+
+@media (max-width: 700px) {
+    .shoppingcart-body{
+        display: block;
+    }
+    .shoppingcart-listItems{
+        width: 100%;
+    }
+    .card{
+        width: 100%;
+    }
+  }
+  
