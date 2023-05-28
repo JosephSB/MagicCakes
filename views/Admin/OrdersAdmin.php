@@ -14,76 +14,82 @@ $BASE_URL = constant('URL') . "public";
 </head>
 
 <body>
-    <div class="main-container">
-        <div class=title>
-            <p>ORDENES</p>
+    <div class="admin-container">
+        <?php require 'views/components/admin/aside.php'; ?>
+        <div class="admin-main">
+            <?php require 'views/components/admin/header.php'; ?>
+            <div class=title>
+                <p>ORDENES</p>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <th>ID</th>
+                        <th>TOTAL</th>
+                        <th>ENVIO</th>
+                        <th>PRECIO</th>
+                        <th>PROVINCIA</th>
+                        <th>DISTRITO</th>
+                        <th>CLIENTE</th>
+                        <th>TELEFONO</th>
+                        <th>ESTADO</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </thead>
+                    <?php if (!empty($this->orders)): ?>
+                        <?php foreach ($this->orders as $order): ?>
+                            <tbody>
+                                <tr>
+
+                                    <td class="align-middle" style="color: black;">
+                                        <?php echo $order['order_id'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $order['ammount'] ?> productos
+                                    </td>
+                                    <td class="align-middle">S/
+                                        <?php echo $order['shippingPrice'] ?>
+                                    </td>
+                                    <td class="align-middle">S/
+                                        <?php echo $order['totalNetPrice'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $order['province'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $order['district'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $order['client'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $order['phoneNumber'] ?>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <div class="status-orders">
+                                            <span class="<?php echo $order['status_class']; ?>-span">
+                                                <?php echo $order['status']; ?>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="center-align"><i class="fa-regular fa-pen-to-square"></i></td>
+                                    <td class="center-align"><i class="fa-regular fa-trash-can"></i></td>
+                                </tr>
+                            </tbody>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-orders-message">
+                            <h3>Aún no se han registrado ordenes.</h3>
+                        </div>
+                    <?php endif; ?>
+                </table>
+            </div>
+            <?php require 'views/components/admin/footer.php'; ?>
         </div>
-        <table class="table">
-            <thead>
-                <th>ID</th>
-                <th>TOTAL</th>
-                <th>ENVIO</th>
-                <th>PRECIO</th>
-                <th>PROVINCIA</th>
-                <th>DISTRITO</th>
-                <th>CLIENTE</th>
-                <th>TELEFONO</th>
-                <th>ESTADO</th>
-                <th>EDITAR</th>
-                <th>ELIMINAR</th>
-            </thead>
-            <?php if (!empty($this->orders)): ?>
-                <?php foreach ($this->orders as $order): ?>
-                    <tbody>
-                        <tr>
-
-                            <td class="align-middle" style="color: black;">
-                                <?php echo $order['order_id'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?php echo $order['ammount'] ?> productos
-                            </td>
-                            <td class="align-middle">S/
-                                <?php echo $order['shippingPrice'] ?>
-                            </td>
-                            <td class="align-middle">S/
-                                <?php echo $order['totalNetPrice'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?php echo $order['province'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?php echo $order['district'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?php echo $order['client'] ?>
-                            </td>
-                            <td class="align-middle">
-                                <?php echo $order['phoneNumber'] ?>
-                            </td>
-
-                            <td class="align-middle">
-                                <div class="status-orders">
-                                    <span class="<?php echo $order['status_class']; ?>-span">
-                                        <?php echo $order['status']; ?>
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="center-align"><i class="fa-regular fa-pen-to-square"></i></td>
-                            <td class="center-align"><i class="fa-regular fa-trash-can"></i></td>
-                        </tr>
-                    </tbody>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="no-orders-message">
-                    <h3>Aún no se han registrado ordenes.</h3>
-                </div>
-            <?php endif; ?>
-        </table>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
 
 </body>
 
