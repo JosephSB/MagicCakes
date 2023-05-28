@@ -5,10 +5,19 @@
         }
 
         function render(){
-            $this->loadModel('ordersAdmin');
             $orders = $this->model->getOrdersAdmin();
         
             $this->view->orders = $orders;
+            $this->view->render('Admin/OrdersAdmin');
+        }
+
+        function edit($idProduct){
+
+            $this->view->render('Admin/OrdersAdmin');
+        }
+
+        function delete($idProduct){
+
             $this->view->render('Admin/OrdersAdmin');
         }
 

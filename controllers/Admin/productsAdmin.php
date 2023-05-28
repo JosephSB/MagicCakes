@@ -5,13 +5,19 @@
         }
 
         function render(){
-            $this->loadModel('productsAdmin');
             $products = $this->model->getProductsAdmin();
         
             $this->view->products = $products;
             $this->view->render('Admin/ProductsAdmin');
         }
 
+        function edit($idProduct){
+            $this->view->render('Admin/ProductsAdmin');
+        }
+
+        function delete($idProduct){
+            $this->view->render('Admin/ProductsAdmin');
+        }
     }
 
 ?>
