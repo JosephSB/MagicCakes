@@ -349,6 +349,82 @@ body {
     }
 }
 
+/*------------ADMIN GLOBAL STYLES ----------------------*/
+.admin-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+
+}
+.admin-main{
+    width: 100%;
+}
+.admin-aside{
+    width: 100%;
+    background-color: var(--bg-color-secondary);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.menu-img{
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-item {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menu-text {
+    font-weight: bold;
+}
+.admin-header{
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.admin-user{
+    width: auto;
+    max-width: 300px;
+    background-color: var(--bg-color-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+.admin-user-title{
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.admin-footer-credits{
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 11px;
+}
+
+
 /*------------STYLES ALERT ----------------------*/
 
 .alerta {

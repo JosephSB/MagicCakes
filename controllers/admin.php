@@ -2,6 +2,11 @@
 
     class Admin extends Controller{
         function __construct(){
+            session_start();
+            if(!isset($_SESSION['user_id'])){
+                header("Location: ".constant('URL')."");
+                return;
+            }
             parent::__construct();
         }
 
