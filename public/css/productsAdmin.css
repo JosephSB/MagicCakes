@@ -1,0 +1,37 @@
+
+.center-align{
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+th{
+    color: #334D6E;
+}
+
+td{
+    color:#707683;
+}
+
+.status {
+    text-align: center;
+    padding: 5px;
+}
+
+.status span {
+    display: inline-block;
+    background-color: #F11061 !important;
+    color: white !important;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.status .active-span {
+    background-color: #109CF1 !important;
+}
