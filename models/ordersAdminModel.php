@@ -53,6 +53,24 @@ class ordersAdminModel extends Model
                         $status = 'Desconocido';
                         break;
                 }
+                $statusClass = '';
+                switch ($row['status']) {
+                    case 0:
+                        $status = 'En curso';
+                        $statusClass = 'status-primary';
+                        break;
+                    case 1:
+                        $status = 'Entregado';
+                        $statusClass = 'status-success';
+                        break;
+                    case 2:
+                        $status = 'Cancelado';
+                        $statusClass = 'status-danger';
+                        break;
+                    default:
+                        $status = 'Desconocido';
+                        break;
+                }
                 $district = '';
                 switch ($row['district']) {
                     case 1:
@@ -106,6 +124,7 @@ class ordersAdminModel extends Model
                     'client' => $row['client'],
                     'phoneNumber' => $row['phoneNumber'],
                     'status' => $status,
+                    'status_class' => $statusClass,
                     'created' => $row['created'],
                 ];
                 array_push($orders, $order);
