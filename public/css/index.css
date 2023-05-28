@@ -382,14 +382,28 @@ body {
 }
 .menu-item {
     width: 100%;
+    cursor: pointer;
+}
+.menu-item a{
+    width: 100%;
     display: grid;
     grid-template-columns: 20px 1fr;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     padding: 0.5rem 1rem;
     border: none;
     background-color: transparent;
-    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-primary);
 }
+.menu-item.active{
+    background-color: var(--color-primary);
+}
+.menu-item.active a {
+    color: var(--bg-color);
+}
+
 
 .menu-text {
     font-weight: bold;
