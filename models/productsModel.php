@@ -113,6 +113,31 @@ class productsModel extends Model
         }
     }
 
+    public function createProducts($data)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    INSERT INTO products (product_id, title, description, urllmage, price, status, created, updated) 
+                    VALUES (:product_id, :title, :description, :url, :price, :status, CURRENT_TIME(), CURRENT_TIME())
+                '
+            );
+            $id ="P".substr(uniqid(),3,8).substr(uniqid(),0,2).substr(uniqid(),0,2);
+            $query->execute([
+                'product_id'=> $id,
+                'title'=> $data["title"],
+                'description' => $data["description"],
+                'url' => $data["url"],
+                'price' => $data["price"],
+                'status' => $data["status"],
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
     public function favProductByProductID($idProduct, $idUser)
     {
         $response["operation"] = false;

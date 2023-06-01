@@ -24,7 +24,7 @@ $BASE_URL = constant('URL') . "public";
                 <p>PRODUCTOS</p>
             </div>
             <div class="product-create">
-                <input type="submit" value="+ CREAR" class="button" />
+                <a href="<?php echo  constant('URL'); ?>admin/productsAdmin/crear" class="button" >+ CREAR</a>
             </div>
             <div class="table-container">
                 <table class="table">

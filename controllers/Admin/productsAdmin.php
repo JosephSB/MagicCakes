@@ -11,6 +11,33 @@
             $this->view->render('Admin/ProductsAdmin');
         }
 
+        function crear(){
+            $data = $_POST;
+            
+            if( empty($data['title']) && empty($data['description']) ){
+                $this->view->message = '';
+                $this->view->Render('Admin/CreateProducts');
+                return;
+            }
+
+            if( empty($data['title']) && empty($data['description']) && empty($data['price'])  && empty($data['url']) ){
+                $this->view->message = 'Formulario Invalido';
+                $this->view->Render('Admin/CreateProducts');
+                return;
+            }
+
+            $this->loadModel("products");
+
+            $resp = $this->model->createProducts($data);
+
+            if(!$resp){
+                $this->view->message = 'Ocurrio un error';
+                $this->view->render('Admin/ProductsAdmin');
+                return;
+            }
+            header("Location: ".constant('URL')."admin/productsAdmin");
+        }
+
         function edit($idProduct){
             $this->view->render('Admin/ProductsAdmin');
         }
