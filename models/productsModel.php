@@ -133,7 +133,7 @@ class productsModel extends Model
             ]);
             return true;
         } catch (PDOException $e) {
-            echo $e;
+            //echo $e;
             return false;
         }
     }
@@ -158,7 +158,21 @@ class productsModel extends Model
             ]);
             return true;
         } catch (PDOException $e) {
-            echo $e;
+            //echo $e;
+            return false;
+        }
+    }
+
+    public function deleteProducts($idProduct)
+    {
+        try {
+            $query = $this->db->connect()->prepare('DELETE FROM products WHERE product_id = :id');
+            $query->execute([
+                'id' => $idProduct
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            //echo $e;
             return false;
         }
     }

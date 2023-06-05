@@ -71,7 +71,10 @@
         }
 
         function delete($idProduct){
-            $this->view->render('Admin/ProductsAdmin');
+            $this->loadModel("products");
+            $resp = $this->model->deleteProducts($idProduct);
+
+            header("Location: ".constant('URL')."admin/productsAdmin");
         }
     }
 
