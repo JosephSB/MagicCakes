@@ -138,6 +138,31 @@ class productsModel extends Model
         }
     }
 
+    public function editProducts($idProduct, $data)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                ' 
+                  UPDATE products SET title = :title, description = :description, urllmage = :url, price = :price, status = :status, updated = CURRENT_TIME() 
+                  WHERE product_id = :id;
+                '
+            );
+            $query->execute([
+                'id' => $idProduct,
+                'title' => $data["title"],
+                'description' => $data["description"],
+                'url' => $data["url"],
+                'price' => $data["price"],
+                'status' => $data["status"],
+                
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo $e;
+            return false;
+        }
+    }
+
     public function favProductByProductID($idProduct, $idUser)
     {
         $response["operation"] = false;

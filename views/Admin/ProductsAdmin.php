@@ -64,7 +64,9 @@ $BASE_URL = constant('URL') . "public";
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="center-align"><i class="fa-regular fa-pen-to-square"></i></td>
+                                    <td class="center-align">
+                                        <a href="<?php echo  constant('URL'); ?>admin/productsAdmin/edit/<?php echo $product['product_id'] ?>"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    </td>
                                     <td class="center-align"><i class="fa-regular fa-trash-can"></i></td>
                                 </tr>
                             </tbody>

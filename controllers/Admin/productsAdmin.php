@@ -39,7 +39,35 @@
         }
 
         function edit($idProduct){
-            $this->view->render('Admin/ProductsAdmin');
+            $data = $_POST;
+
+            $this->loadModel("products");
+            $datProduct = $this->model->getDetailsProducts($idProduct);
+            $this->view->data = $datProduct[0];
+            $this->view->idProduct=$idProduct;
+
+            if( empty($data['title']) && empty($data['description']) ){
+                $this->view->message = '';
+                $this->view->Render('Admin/EditProduct');
+                return;
+            }
+
+            if( empty($data['title']) && empty($data['description']) && empty($data['price'])  && empty($data['url']) ){
+                $this->view->message = 'Formulario Invalido';
+                $this->view->Render('Admin/EditProduct');
+                return;
+            }
+            
+
+            $resp = $this->model->editProducts($idProduct, $data);
+
+            if(!$resp){
+                //$this->view->idProduct=$idProduct;
+                $this->view->message = 'Ocurrio un error';
+                $this->view->render('Admin/EditProduct');
+                return;
+            }
+            header("Location: ".constant('URL')."admin/productsAdmin");
         }
 
         function delete($idProduct){
