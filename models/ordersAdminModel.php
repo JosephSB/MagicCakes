@@ -135,5 +135,6 @@ class ordersAdminModel extends Model
             return [];
         }
     }
+
 }
 ?>
