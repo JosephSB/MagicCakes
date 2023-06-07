@@ -100,3 +100,47 @@ td{
 .button:hover{
     background-color: var(--color-primary-hover);
 }
+
+#status{
+    
+        width: 50%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+      
+}
+
+  select#status {
+    color: #fff;
+  }
+  
+  .select-en-curso {
+    background-color: #F1B210; /* Color de fondo para estado "En curso" */
+  }
+  
+  .select-entregado {
+    background-color: #109CF1; /* Color de fondo para estado "Entregado" */
+  }
+  
+  .select-cancelado {
+    background-color: #F11061; /* Color de fondo para estado "Cancelado" */
+  }
+
+  .button-orders{
+    width: 50%;
+    max-width: 200px;
+    font-size: 14px;
+    border: none;
+    color: var(--color-primary);
+    background-color:  var(--bg-color-secondary);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+  .button-orders:hover{
+    background-color: rgb(255, 255, 255);
+  }
+
+  

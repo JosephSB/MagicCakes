@@ -14,7 +14,7 @@ class ordersAdmin extends Controller
         $this->view->render('Admin/OrdersAdmin');
     }
 
-    function edit($idOrder)
+   /* function edit($idOrder)
     {
         $data = $_POST;
 
@@ -38,7 +38,20 @@ class ordersAdmin extends Controller
         }
         header("Location: " . constant('URL') . "admin/ordersAdmin");
 
+    }*/
+
+    function edit($idOrder)
+{
+    $data = $_POST;
+
+    if (isset($data['status'])) {
+        $this->loadModel("orders");
+        $this->model->updateOrderStatus($idOrder, $data['status']);
     }
+
+    header("Location: " . constant('URL') . "admin/ordersAdmin");
+}
+
 
 
 }

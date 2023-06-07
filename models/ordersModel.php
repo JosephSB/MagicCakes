@@ -156,69 +156,27 @@ class ordersModel extends Model
 
 
 
-    public function getDetailsOrders($id)
-    {
 
+    public function updateOrderStatus($orderId, $status) {
         try {
-            $query = $this->db->connect()->prepare('
-                SELECT 
-                    d.name AS name,
-                    d.lastname AS lastname,
-                    o.created AS created,
-                    o.status AS status
-                FROM 
-                    orders AS o 
-                INNER JOIN detail_orders AS d ON o.order_id = d.order_id 
-                WHERE o.order_id = :id;
-            ');
-
-            $query->execute(['id' => $id]);
-
-            $arr_orders = array();
-
-            while ($row = $query->fetch()) {
-                $orders = array(
-                    'name' => $row['name'],
-                    'lastname' => $row['lastname'],
-                    'created' => $row['created'],
-                    'status' => $row['status'],
-                );
-                array_push($arr_orders, $orders);
-            }
-
-            return $arr_orders;
-        } catch (PDOException $e) {
-            //echo $e;
-            return [];
-        }
-    }
-
-    public function editOrders($idOrder, $data)
-    {
-        try {
-            $query = $this->db->connect()->prepare(
-                '
-                UPDATE orders AS o
-                INNER JOIN detail_orders AS d ON o.order_id = d.order_id
-                SET o.status = :status,
-                    o.created = :created,
-                    d.name = :name,
-                    d.lastname = :lastname
-                WHERE o.order_id = :id;
-                '
-            );
-
-            $query->execute([
-                'id' => $idOrder,
-                'status' => $data['status'],
-                'created' => $data['created'],
-                'name' => $data['name'],
-                'lastname' => $data['lastname'],
-            ]);
-
+            $pdo = $this->db->connect();
+            $pdo->beginTransaction();
+    
+            // Obtener la fecha actual
+            $currentDate = date('Y-m-d');
+    
+            // Actualizar el estado de la orden
+            $query = $pdo->prepare('UPDATE orders SET status = :status, shipDate = :shipDate WHERE order_id = :order_id');
+            $query->bindValue(':status', $status, PDO::PARAM_INT);
+            $query->bindValue(':shipDate', $currentDate, PDO::PARAM_STR);
+            $query->bindValue(':order_id', $orderId, PDO::PARAM_INT);
+            $query->execute();
+    
+            $pdo->commit();
             return true;
         } catch (PDOException $e) {
-            //echo $e;
+            $pdo->rollback();
+            echo "Error al actualizar el estado de la orden: " . $e->getMessage();
             return false;
         }
     }

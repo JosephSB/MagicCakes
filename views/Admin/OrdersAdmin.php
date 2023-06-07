@@ -33,7 +33,7 @@ $BASE_URL = constant('URL') . "public";
                         <th>CLIENTE</th>
                         <th>TELEFONO</th>
                         <th>ESTADO</th>
-                        <th>EDITAR</th>
+                        <!-- <th>EDITAR</th> -->
                     </thead>
                     <?php if (!empty($this->orders)): ?>
                         <?php foreach ($this->orders as $order): ?>
@@ -66,18 +66,27 @@ $BASE_URL = constant('URL') . "public";
                                     </td>
 
                                     <td class="align-middle">
-                                        <div class="status-orders">
-                                            <span class="<?php echo $order['status_class']; ?>-span">
-                                                <?php echo $order['status']; ?>
-                                            </span>
-                                        </div>
+                                        <form
+                                            action="<?php echo constant('URL'); ?>admin/ordersAdmin/edit/<?php echo $order['order_id']; ?>"
+                                            method="POST">
+                                            <div class="input-group">
+                                                <select
+                                                    class="form-select <?php echo intval($order['status']) === 0 ? 'select-en-curso' : (intval($order['status']) === 1 ? 'select-entregado' : 'select-cancelado'); ?>"
+                                                    name="status" id="status">
+                                                    <option value="0" <?php echo intval($order['status']) === 0 ? 'selected' : ''; ?>>En curso</option>
+                                                    <option value="1" <?php echo intval($order['status']) === 1 ? 'selected' : ''; ?>>Entregado</option>
+                                                    <option value="2" <?php echo intval($order['status']) === 2 ? 'selected' : ''; ?>>Cancelado</option>
+                                                </select>
+                                                <button class="button-orders" type="submit">Guardar</button>
+                                            </div>
+                                        </form>
                                     </td>
-                                    <td class="center-align">
+                                    <!--     <td class="center-align">
                                         <a
                                             href="<?php echo constant('URL'); ?>admin/ordersAdmin/edit/<?php echo $order['order_id'] ?>"><i
                                                 class="fa-regular fa-pen-to-square"></i></a>
                                     </td>
-                                </tr>
+                                </tr>-->
                             </tbody>
                         <?php endforeach; ?>
                     <?php else: ?>

@@ -41,34 +41,34 @@ class ordersAdminModel extends Model
                 $status = '';
                 switch ($row['status']) {
                     case 0:
-                        $status = 'En curso';
+                        $status = 0;
                         break;
                     case 1:
-                        $status = 'Entregado';
+                        $status = 1;
                         break;
                     case 2:
-                        $status = 'Cancelado';
+                        $status = 2;
                         break;
                     default:
-                        $status = 'Desconocido';
+                        $status = -1;
                         break;
                 }
                 $statusClass = '';
                 switch ($row['status']) {
                     case 0:
-                        $status = 'En curso';
+                        $status = 0;
                         $statusClass = 'status-primary';
                         break;
                     case 1:
-                        $status = 'Entregado';
+                        $status = 1;
                         $statusClass = 'status-success';
                         break;
                     case 2:
-                        $status = 'Cancelado';
+                        $status = 2;
                         $statusClass = 'status-danger';
                         break;
                     default:
-                        $status = 'Desconocido';
+                        $status = -1;
                         break;
                 }
                 $district = '';
