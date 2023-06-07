@@ -40,6 +40,19 @@
             else $controler-> {$params[0]}($params);
         }
 
+        public function usersAdmin($params = []){
+            require_once 'Admin/usersAdmin.php';
+            $controler = new usersAdmin();
+            $controler->loadModel('usersAdmin');
+
+            if(empty($params)) {
+                $controler->render();
+                return;
+            }
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
+        }
+
     }
 
 ?>
