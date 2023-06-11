@@ -44,6 +44,12 @@
                 return;
             }
 
+            if($validate -> validatePhone($data['number']) == false){
+                $this->view->message = 'Celular invalido';
+                $this->view->Render('Auth/register');
+                return;
+            }
+
             if($this->model->createUser($data)){
                 header("Location: ".constant('URL')."login");
                 return;
