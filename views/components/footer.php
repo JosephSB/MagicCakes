@@ -11,7 +11,7 @@
                 <a href="<?php echo  constant('URL'); ?>termCondition">Terminos y Condiciones</a>
             </div>
             <div class="element">
-                <a href="<?php echo  constant('URL'); ?>aboutUs">Reclamaciones</a>
+                <a href="<?php echo  constant('URL'); ?>claim">Reclamaciones</a>
             </div>
         </div>
 

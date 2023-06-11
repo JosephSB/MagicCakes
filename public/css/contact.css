@@ -2,88 +2,35 @@
     background-color: var(--bg-color);
     padding:25px 40px;
     margin-bottom:20px;
-    display: flex;
-    justify-content: space-around;
 }
 
-.contact-container-left{
-    padding-left: 25px;
-    padding-right: 25px;
-    width: 45%;
-}
 
-.left-title p{
+.title p{
     font-weight: 900;
     font-size: 24px;
     line-height: 50px;
     text-align: center;
 }
 
-.left-body{
+.top-body{
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
+    display: flex;
     text-align:justify;
-}
-
-.contact-container-right{
-    padding-left: 25px;
-    padding-right: 25px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    
-}
-
-input[type="number"],
-input[type="email"],
-input[type="text"]{
-    outline: none;
-    font-size: 20px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-}
-.input-container{
-    margin: 0.5rem 0;
-    border-radius: 5px;
-    padding: 0.5rem;
-    border: 1px solid var(--color-secondary);
-    display: flex;
-}
-.input-container input{
-    font-size: 14px;
-}
-
-.button{
-    width: 100%;
-    max-width: 200px;
-    font-size: 14px;
-    border: none;
-    color: var(--text-color);
-    background-color:  var(--color-primary);
-    padding: 15px 20px;
-    border-radius: 5px;
-    cursor: pointer;
     justify-content: center;
-    align-items: center;
-    margin: auto;
+}
+
+.bottom-body{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
 }
 
-
-.input-container textarea{
-    font-size: 14px;
-    outline: none;
-    width: 100%;
-    padding: 10px;
-    border: none;
+.bottom-body i{
+    margin: 10px;
 }
-
-.button:hover{
-    background-color: var(--color-primary-hover);
-}
-
-
 
 @media(max-width: 1000px){
     .contact-container{

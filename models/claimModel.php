@@ -1,11 +1,11 @@
 <?php 
 
-    class contactModel extends Model{
+    class claimModel extends Model{
         function __construct(){
             parent::__construct();
         }
         
-        public function createContact($data)
+        public function createClaim($data)
         {
             try {
                 $query = $this->db->connect()->prepare(
