@@ -38,6 +38,9 @@ $BASE_URL = constant('URL') . "public";
                     <input name="price" type="number" placeholder="PRECIO">
                 </div>
                 <div class="input-container">
+                    <input name="stock" type="number" placeholder="STOCK">
+                </div>
+                <div class="input-container">
                     <select name="status" class="box">
                         <option value="0">INACTIVO</option>
                         <option value="1" selected>ACTIVO</option>

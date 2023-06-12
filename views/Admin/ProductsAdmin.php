@@ -34,6 +34,7 @@ $BASE_URL = constant('URL') . "public";
                         <th>TITULO</th>
                         <th>DESCRIPCION</th>
                         <th>PRECIO</th>
+                        <th>STOCK</th>
                         <th>ESTADO</th>
                         <th>EDITAR</th>
                         <th>ELIMINAR</th>
@@ -56,6 +57,9 @@ $BASE_URL = constant('URL') . "public";
                                     </td>
                                     <td class="align-middle">S/
                                         <?php echo $product['price'] ?>
+                                    </td>
+                                    <td class="align-middle">
+                                        <?php echo $product['stock'] ?>
                                     </td>
                                     <td class="align-middle">
                                         <div class="status">

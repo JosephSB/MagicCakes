@@ -38,6 +38,9 @@ $BASE_URL = constant('URL') . "public";
                     <input name="price" value="<?php echo $this->data['price'] ?>" type="number" placeholder="PRECIO">
                 </div>
                 <div class="input-container">
+                    <input name="stock" value="<?php echo $this->data['stock'] ?>" type="number" placeholder="STOCK">
+                </div>
+                <div class="input-container">
                     <select name="status" class="box">
                         <option value="0" <?php echo $this->data['status'] === 0 ? "selected" : "" ?>>INACTIVO</option>
                         <option value="1" <?php echo $this->data['status'] === 1 ? "selected" : "" ?>>ACTIVO</option>

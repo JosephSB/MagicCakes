@@ -22,6 +22,7 @@ class productsAdminModel extends Model
                     'description' => $row['description'],
                     'urllmage' => $row['urllmage'],
                     'price' => $row['price'],
+                    'stock' => $row['stock'] ? $row['stock'] : 0,
                     'status' => $status,
                     'status_class' => $statusClass,
                     'updated' => $row['updated'],

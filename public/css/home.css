@@ -100,7 +100,6 @@
     color: var(--color-primary);
 }
 /*---------CARD--------------*/
-
 .card-product{
     width: 100%;
     max-width: 320px;
@@ -110,6 +109,29 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+.card-product-spam{
+    width: 100%;
+    text-align: end;
+}
+.card-product-spam p{
+    display: inline-block;
+    width: auto;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.card-product-spam-err p{
+    background-color: #e13e3e;
+    border-radius: 5px;
+    color: white;
+}
+.card-product-spam-medium p{
+    background-color:  #3e89e1;
+    border-radius: 5px;
+    color: white;
 }
 .card-product-containerImg{
     width: 100%;

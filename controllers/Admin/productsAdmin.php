@@ -52,7 +52,7 @@
                 return;
             }
 
-            if( empty($data['title']) && empty($data['description']) && empty($data['price'])  && empty($data['url']) ){
+            if( empty($data['title']) && empty($data['description']) && empty($data['price']) && empty($data['stock'])  && empty($data['url']) ){
                 $this->view->message = 'Formulario Invalido';
                 $this->view->Render('Admin/EditProduct');
                 return;

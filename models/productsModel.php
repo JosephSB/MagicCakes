@@ -17,7 +17,7 @@ class productsModel extends Model
             if ($SEARCHTEXT) $sWhere = "and p.title like " . "'%" . $SEARCHTEXT . "%'";
             $querySQL = '
                 SELECT 
-                    p.product_id, p.title, p.description, p.urllmage, p.price, p.status, p.updated, p.created,
+                    p.product_id, p.title, p.description, p.urllmage, p.price, p.stock, p.status, p.updated, p.created,
                     IF(COUNT(pf.product_id) > 0, true, false) AS isFav
                 FROM products p 
                 LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
@@ -34,6 +34,7 @@ class productsModel extends Model
                     'description' => $row['description'],
                     'urllmage' => $row['urllmage'],
                     'price' => $row['price'],
+                    'stock' => $row['stock'],
                     'status' => $row['status'],
                     'updated' => $row['updated'],
                     'created' => $row['created'],
@@ -54,7 +55,7 @@ class productsModel extends Model
             $query = $this->db->connect()->prepare(
                 '
                 SELECT 
-                    p.product_id, p.title, p.description, p.urllmage, p.price, p.status, p.updated, p.created,
+                    p.product_id, p.title, p.description, p.urllmage, p.price, p.stock, p.status, p.updated, p.created,
                     IF(COUNT(pf.product_id) > 0, true, false) AS isFav
                 FROM products p 
                 LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
@@ -72,6 +73,7 @@ class productsModel extends Model
                     'description' => $row['description'],
                     'urllmage' => $row['urllmage'],
                     'price' => $row['price'],
+                    'stock' => $row['stock'],
                     'status' => $row['status'],
                     'updated' => $row['updated'],
                     'created' => $row['created'],
@@ -81,7 +83,7 @@ class productsModel extends Model
             }
             return $arr_products;
         } catch (PDOException $e) {
-            echo $e;
+            //echo $e;
             return [];
         }
     }
@@ -100,6 +102,7 @@ class productsModel extends Model
                     'description' => $row['description'],
                     'urllmage' => $row['urllmage'],
                     'price' => $row['price'],
+                    'stock' => $row["stock"] ? $row["stock"] : 0,
                     'status' => $row['status'],
                     'updated' => $row['updated'],
                     'created' => $row['created'],
@@ -118,8 +121,8 @@ class productsModel extends Model
         try {
             $query = $this->db->connect()->prepare(
                 '
-                    INSERT INTO products (product_id, title, description, urllmage, price, status, created, updated) 
-                    VALUES (:product_id, :title, :description, :url, :price, :status, CURRENT_TIME(), CURRENT_TIME())
+                    INSERT INTO products (product_id, title, description, urllmage, price,stock, status, created, updated) 
+                    VALUES (:product_id, :title, :description, :url, :price, :stock, :status, CURRENT_TIME(), CURRENT_TIME())
                 '
             );
             $id ="P".substr(uniqid(),3,8).substr(uniqid(),0,2).substr(uniqid(),0,2);
@@ -129,6 +132,7 @@ class productsModel extends Model
                 'description' => $data["description"],
                 'url' => $data["url"],
                 'price' => $data["price"],
+                'stock' => $data["stock"],
                 'status' => $data["status"],
             ]);
             return true;
@@ -143,7 +147,7 @@ class productsModel extends Model
         try {
             $query = $this->db->connect()->prepare(
                 ' 
-                  UPDATE products SET title = :title, description = :description, urllmage = :url, price = :price, status = :status, updated = CURRENT_TIME() 
+                  UPDATE products SET title = :title, description = :description, urllmage = :url, price = :price, stock = :stock, status = :status, updated = CURRENT_TIME() 
                   WHERE product_id = :id;
                 '
             );
@@ -153,8 +157,8 @@ class productsModel extends Model
                 'description' => $data["description"],
                 'url' => $data["url"],
                 'price' => $data["price"],
+                'stock' => $data["stock"],
                 'status' => $data["status"],
-                
             ]);
             return true;
         } catch (PDOException $e) {
