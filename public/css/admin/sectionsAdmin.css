@@ -126,6 +126,22 @@ td{
     background-color: #F11061; /* Color de fondo para estado "Cancelado" */
   }
 
+  .select-en-curso option:not(:checked) {
+    background-color: #fff; /* Fondo blanco para opciones no seleccionadas en estado "En curso" */
+}
+
+.select-entregado option:not(:checked) {
+    background-color: #fff; /* Fondo blanco para opciones no seleccionadas en estado "Entregado" */
+}
+
+.select-cancelado option:not(:checked) {
+    background-color: #fff; /* Fondo blanco para opciones no seleccionadas en estado "Cancelado" */
+}
+#status option:not(:checked) {
+    color: #000; /* Color de letra en negro para las opciones no seleccionadas */
+}
+
+
   .button-orders{
     width: 50%;
     max-width: 200px;

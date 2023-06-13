@@ -75,18 +75,14 @@ $BASE_URL = constant('URL') . "public";
                                                     name="status" id="status">
                                                     <option value="0" <?php echo intval($order['status']) === 0 ? 'selected' : ''; ?>>En curso</option>
                                                     <option value="1" <?php echo intval($order['status']) === 1 ? 'selected' : ''; ?>>Entregado</option>
-                                                    <option value="2" <?php echo intval($order['status']) === 2 ? 'selected' : ''; ?>>Cancelado</option>
+                                                    <option value="2" <?php echo intval($order['status']) === 2 ? 'selected' : ''; ?>>Anulado</option>
                                                 </select>
                                                 <button class="button-orders" type="submit">Guardar</button>
                                             </div>
                                         </form>
                                     </td>
-                                    <!--     <td class="center-align">
-                                        <a
-                                            href="<?php echo constant('URL'); ?>admin/ordersAdmin/edit/<?php echo $order['order_id'] ?>"><i
-                                                class="fa-regular fa-pen-to-square"></i></a>
-                                    </td>
-                                </tr>-->
+
+                                </tr>
                             </tbody>
                         <?php endforeach; ?>
                     <?php else: ?>
