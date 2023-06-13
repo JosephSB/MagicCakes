@@ -12,6 +12,30 @@
         }
 
         function crear(){
+            $data = $_POST;
+            
+            if( empty($data['name']) && empty($data['email']) ){
+                $this->view->message = '';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+
+            if( empty($data['name']) && empty($data['lastname']) && empty($data['email'])  && empty($data['password']) ){
+                $this->view->message = 'Formulario Invalido';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+
+            $this->loadModel("user");
+
+            $resp = $this->model->createUser($data);
+
+            if(!$resp){
+                $this->view->message = 'Ocurrio un error';
+                $this->view->render('Admin/UsersAdmin');
+                return;
+            }
+
             
             header("Location: ".constant('URL')."admin/usersAdmin");
         }

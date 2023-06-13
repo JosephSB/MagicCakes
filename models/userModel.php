@@ -19,7 +19,7 @@ class userModel extends Model
                         VALUES (:user_id, :role, :name, :lastname, :email, :phone, :address, :password, :status, CURRENT_TIME())
                     '
             );
-            $id = "U" . substr(uniqid(), 3, 8) . substr($data['Name'], 0, 2) . substr($data['LastName'], 0, 2);
+            $id = "U" . substr(uniqid(), 3, 8) . substr($data['name'], 0, 2) . substr($data['lastname'], 0, 2);
             $query->execute([
                 'user_id' => $id,
                 'role' => "user",
@@ -88,6 +88,7 @@ class userModel extends Model
             return [];
         }
     }
+    
 }
 
 ?>
