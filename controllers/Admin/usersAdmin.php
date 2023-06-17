@@ -1,4 +1,5 @@
-<?php 
+<?php
+require './utils/ValidateCredentials.php'; 
     class usersAdmin extends Controller{
         function __construct(){
             parent::__construct();
@@ -26,13 +27,42 @@
                 return;
             }
 
+            $validate = new ValidateCredentials();
             $this->loadModel("user");
+
+            if($validate -> validateUser($data['name']) == false){
+                $this->view->message = 'Nombre invalido';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+            if($validate -> validateUser($data['lastname']) == false){
+                $this->view->message = 'Apellido invalido';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+            if($validate -> validatePass($data['password']) == false){
+                $this->view->message = 'Contraseña invalida, max 8-12 digistos, mayusculas minusculas y caracter especial';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+            if($validate -> validateEmail($data['email']) == false){
+                $this->view->message = 'Email invalido';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+
+            if($validate -> validatePhone($data['number']) == false){
+                $this->view->message = 'Celular invalido';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+            
 
             $resp = $this->model->createUser($data);
 
             if(!$resp){
-                $this->view->message = 'Ocurrio un error';
-                $this->view->render('Admin/UsersAdmin');
+                $this->view->message = 'El email ya esta registrado';
+                $this->view->render('Admin/CreateUsers');
                 return;
             }
 

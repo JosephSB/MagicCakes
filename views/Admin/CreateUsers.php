@@ -48,7 +48,7 @@ $BASE_URL = constant('URL') . "public";
                         <option value="1" selected>ACTIVO</option>
                     </select>
                 </div>
-
+                <p class="text-error"><?php echo $this->message; ?></p>
                 <input type="submit" value="CREAR" class="button">
                 </div>
             </form>
