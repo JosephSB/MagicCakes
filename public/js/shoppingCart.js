@@ -18,13 +18,17 @@ const addToCart = async (data) => {
         const res = await fetch(`${URL_WEB}/api/cart/addProduct`, options) /*NO ENTIENOD*/
         const data = await res.json()
 
-        if(data.status === 200 && data.operation === true){
-            return true
+        if(data.status === 200){
+            return data
         }
-        return false
+
+        throw new Error("Error")
     } catch (error) {
         console.error(error)
-        return false
+        return {
+            operation: false,
+            data: "Ocurrio un error"
+        }
     }
 }
 
@@ -60,7 +64,7 @@ if(BtnAddToCart){
         }
         addToCart(data)
             .then( resp => {
-                if(resp){
+                if(resp.operation){
                     showAlert("Producto agregado exitosamente", "fa-solid fa-circle-check", "#55efc4")
                     BtnAddToCart.innerHTML=`Producto Agregado`
                     BtnAddToCart.setAttribute("disabled", true)
@@ -68,7 +72,7 @@ if(BtnAddToCart){
                     IconMyCart.innerText = parseInt(IconMyCart.innerText || "0") + 1;
                     return
                 }
-                showAlert("Ocurrio un error", "fa-solid fa-xmark", "#FF7675")
+                showAlert(resp.data, "fa-solid fa-xmark", "#FF7675")
                 BtnAddToCart.innerHTML=`Agregar al carrito`
             } )
     })

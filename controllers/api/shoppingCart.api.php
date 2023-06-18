@@ -46,6 +46,14 @@
             $ammount = isset($data['ammount']) ? $data['ammount'] : 0;
             $item_id = isset($data['productID']) ? $data['productID'] : "";
 
+            $respStock = $this->model->getStockOfProduct($item_id);
+            $stock = isset($respStock) ? intval($respStock) : 0;
+
+            if( (intval($stock) - intval($ammount)) < 0 ){
+                echo $this->sendJson("No hay stock suficiente del producto", false);
+                return;
+            }
+
             if($this->model->addItemToShoppingCart($user_id, $ammount, $item_id)){
                 echo $this->sendJson("producto agregado exitosamente", true);
                 return;

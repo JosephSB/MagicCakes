@@ -114,6 +114,30 @@ class shoppingCartModel extends Model
         }
     }
 
+    public function getStockOfProduct($productID)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    SELECT stock FROM products WHERE product_id = :id
+                '
+            );
+            $query->execute([
+                'id'=> $productID,
+            ]);
+            $totalStock = array();
+            while ($row = $query->fetch()) {
+                $totalStock = array(
+                    'stock' => $row['stock'],
+                );
+            }
+            return $totalStock["stock"];
+        } catch (PDOException $e) {
+            //echo $e;
+            return 0;
+        }
+    }
+
     public function removeItemFromShoppingCart($user_id, $id)
     {
         try {
