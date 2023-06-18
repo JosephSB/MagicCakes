@@ -18,6 +18,8 @@ class ordersAdminModel extends Model
                 o.totalNetPrice AS totalNetPrice, 
                 d.province AS province, 
                 d.district AS district, 
+                d.lat AS lat,
+                d.lng AS lng,
                 CONCAT(d.name, " ", d.lastname) AS client, 
                 d.phoneNumber AS phoneNumber, 
                 o.status AS status,
@@ -32,12 +34,7 @@ class ordersAdminModel extends Model
             $query->execute();
             $orders = [];
             while ($row = $query->fetch()) {
-                $province = '';
-                switch ($row['province']) {
-                    case 1:
-                        $province = 'Lima';
-                        break;
-                }
+                $province = $row['province'];
                 $status = '';
                 switch ($row['status']) {
                     case 0:
@@ -71,49 +68,7 @@ class ordersAdminModel extends Model
                         $status = -1;
                         break;
                 }
-                $district = '';
-                switch ($row['district']) {
-                    case 1:
-                        $district = 'Villa Maria del Triunfo';
-                        break;
-                    case 2:
-                        $district = 'San Juan de Miraflores';
-                        break;
-                    case 3:
-                        $district = 'Villa Maria del Triunfo';
-                        break;
-                    case 4:
-                        $district = 'Lurin';
-                        break;
-                    case 5:
-                        $district = 'Barranco';
-                        break;
-                    case 6:
-                        $district = 'Pachacamac';
-                        break;
-                    case 7:
-                        $district = 'Chorrillos';
-                        break;
-                    case 8:
-                        $district = 'San Miguel';
-                        break;
-                    case 9:
-                        $district = 'Santa Anita';
-                        break;
-                    case 10:
-                        $district = 'Santiago de Surco';
-                        break;
-                    case 11:
-                        $district = 'Miraflores';
-                        break;
-                    case 12:
-                        $district = 'San Borja';
-                        break;
-                    case 13:
-                        $district = 'San Isidro';
-                        break;
-
-                }
+                $district = $row['district'];
                 $order = [
                     'order_id' => $row['order_id'],
                     'ammount' => $row['ammount'],
@@ -126,6 +81,8 @@ class ordersAdminModel extends Model
                     'status' => $status,
                     'status_class' => $statusClass,
                     'created' => $row['created'],
+                    "lat" => $row["lat"],
+                    "lng" => $row["lng"],
                 ];
                 array_push($orders, $order);
             }

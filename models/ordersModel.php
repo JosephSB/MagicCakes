@@ -68,8 +68,8 @@ class ordersModel extends Model
             );
             $queryDetail = $this->db->connect()->prepare(
                 '
-                        INSERT INTO detail_orders ( order_id, name, lastname, address,detail_address,department,province, district,postalCode, phoneNumber) 
-                        VALUES (:order_id, :name, :lastname, :address,:detail_address,:department,:province, :district,:postalCode, :phoneNumber)
+                        INSERT INTO detail_orders ( order_id, name, lastname, address,detail_address,department,province, district,postalCode, phoneNumber, lat, lng) 
+                        VALUES (:order_id, :name, :lastname, :address,:detail_address,:department,:province, :district,:postalCode, :phoneNumber, :lat, :lng)
                     '
             );
             $order_id = "O" . substr(uniqid(), 3, 8) . substr(uniqid(), 0, 2) . substr(uniqid(), 0, 2);
@@ -96,6 +96,8 @@ class ordersModel extends Model
                 "district" => $data["district"],
                 "postalCode" => $data["postalCode"],
                 "phoneNumber" => $data["phoneNumber"],
+                "lat" => $data["lat"],
+                "lng" => $data["lng"],
             ]);
 
             // migrate products shopping cart to products order
