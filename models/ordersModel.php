@@ -17,6 +17,7 @@ class ordersModel extends Model
                     JOIN products_orders po ON o.order_id = po.order_id
                     JOIN products p ON po.product_id = p.product_id
                     WHERE o.client_id = :user_id
+                    ORDER BY o.created DESC;
                     '
             );
             $query->execute([
