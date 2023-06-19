@@ -93,5 +93,57 @@ class ordersAdminModel extends Model
         }
     }
 
+    public function getDetailOrder($id)
+    {
+
+        try {
+            $query = $this->db->connect()->prepare('
+            SELECT 
+                o.order_id AS order_id, 
+                SUM(po.ammount) AS ammount, 
+                o.shippingPrice AS shippingPrice, 
+                o.totalNetPrice AS totalNetPrice, 
+                d.province AS province, 
+                d.district AS district, 
+                d.address AS address, 
+                d.lat AS lat,
+                d.lng AS lng,
+                CONCAT(d.name, " ", d.lastname) AS client, 
+                d.phoneNumber AS phoneNumber, 
+                o.status AS status,
+                o.created AS created
+            FROM 
+            orders AS o 
+            INNER JOIN detail_orders AS d ON o.order_id = d.order_id 
+            INNER JOIN products_orders AS po ON o.order_id = po.order_id 
+            WHERE o.order_id = :id;
+            ');
+            $query->execute(['id' => $id]);
+            $arr_products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'order_id' => $row['order_id'],
+                    'ammount' => $row['ammount'],
+                    'shippingPrice' => $row['shippingPrice'],
+                    'totalNetPrice' => $row['totalNetPrice'],
+                    'province' => $row['province'],
+                    'district' => $row["district"],
+                    'address' => $row['address'],
+                    'lat' => $row['lat'],
+                    'lng' => $row['lng'],
+                    'client' => $row['client'],
+                    'phoneNumber' => $row['phoneNumber'],
+                    'status' => $row['status'],
+                    'created' => $row['created'],
+                );
+                array_push($arr_products, $products);
+            }
+            return $arr_products;
+        } catch (PDOException $e) {
+            //echo $e;
+            return [];
+        }
+    }
+
 }
 ?>

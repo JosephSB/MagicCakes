@@ -14,6 +14,14 @@ class ordersAdmin extends Controller
         $this->view->render('Admin/OrdersAdmin');
     }
 
+    function detail($idOrder)
+    {
+        $dataOrders = $this->model->getDetailOrder($idOrder);
+        $this->view->idOrder = $idOrder;
+        $this->view->order = $dataOrders[0];
+        $this->view->render('Admin/DetailOrdersAdmin');
+    }
+
     /* function edit($idOrder)
     {
         $data = $_POST;

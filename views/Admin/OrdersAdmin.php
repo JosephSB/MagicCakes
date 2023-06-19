@@ -33,7 +33,7 @@ $BASE_URL = constant('URL') . "public";
                         <th>CLIENTE</th>
                         <th>TELEFONO</th>
                         <th>ESTADO</th>
-                        <!-- <th>EDITAR</th> -->
+                        <th>VER</th>
                     </thead>
                     <?php if (!empty($this->orders)): ?>
                         <?php foreach ($this->orders as $order): ?>
@@ -81,7 +81,9 @@ $BASE_URL = constant('URL') . "public";
                                             </div>
                                         </form>
                                     </td>
-
+                                    <td class="align-middle">
+                                        <a href="<?php echo  constant('URL'); ?>admin/ordersAdmin/detail/<?php echo $order['order_id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                    </td>
                                 </tr>
                             </tbody>
                         <?php endforeach; ?>
