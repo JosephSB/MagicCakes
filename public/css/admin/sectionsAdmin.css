@@ -166,4 +166,35 @@ td{
     max-height: 400px;
 }
 
+.list-deliverys{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 200px;
+}
+
+.delivery-option{
+    padding: 1rem;
+    border-radius: 5px;
+    background-color: var(--bg-color-secondary);
+    width: 100%;
+    max-width: 200px;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
   
+.delivery-option .text-option{
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.delivery-option .text-option strong{
+    font-size: 14px;
+}

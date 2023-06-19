@@ -2,7 +2,7 @@ const gmap = document.getElementById("map");
 
 function initMap() {
     // Coordenadas de los marcadores
-    var marker1 = { lat: -12.1926446, lng: -76.9721896 };
+    var marker1 = { lat: -12.1736139, lng: -76.9807175 };
     var marker2 = { lat: parseFloat(gmap.dataset.lat || 0), lng: parseFloat(gmap.dataset.lng || 0) };
 
     // Crear un mapa centrado en una ubicación específica
