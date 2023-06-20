@@ -201,6 +201,7 @@ class ordersModel extends Model
             $pdo->beginTransaction();
 
             // Obtener la fecha actual
+            date_default_timezone_set('America/Lima');
             $currentDate = date('Y-m-d');
 
             // Actualizar el estado de la orden
