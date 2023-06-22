@@ -53,6 +53,19 @@
             else $controler-> {$params[0]}($params);
         }
 
+        public function claimsAdmin($params = []){
+            require_once 'Admin/claimsAdmin.php';
+            $controler = new claimsAdmin();
+            $controler->loadModel('claimsAdmin');
+
+            if(empty($params)) {
+                $controler->render();
+                return;
+            }
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
+        }
+
     }
 
 ?>
