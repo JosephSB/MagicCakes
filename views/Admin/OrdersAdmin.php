@@ -71,7 +71,7 @@ $BASE_URL = constant('URL') . "public";
                                             method="POST">
                                             <div class="input-group">
                                                 <select
-                                                    class="form-select <?php echo intval($order['status']) === 0 ? 'select-pendiente' : intval($order['status']) === 1 ? 'select-en-curso' : (intval($order['status']) === 2 ? 'select-entregado' : 'select-cancelado'); ?>"
+                                                    class="form-select <?php echo intval($order['status']) === 0 ? 'select-pendiente' : (intval($order['status']) === 1 ? 'select-en-curso' : (intval($order['status']) === 2 ? 'select-entregado' : 'select-cancelado')); ?>"
                                                     name="status" id="status">
                                                     <option value="0" <?php echo intval($order['status']) === 0 ? 'selected' : ''; ?>>Pendiente</option>
                                                     <option value="1" <?php echo intval($order['status']) === 1 ? 'selected' : ''; ?>>En curso</option>
