@@ -208,9 +208,9 @@ class ordersModel extends Model
             $query = $pdo->prepare('UPDATE orders SET status = :status, shipDate = :shipDate WHERE order_id = :order_id');
             $query->bindValue(':status', $status, PDO::PARAM_INT);
 
-            if ($status == 0) {
+            if ($status == 1) {
                 $query->bindValue(':shipDate', null, PDO::PARAM_NULL);
-            } else if ($status == 2) {
+            } else if ($status == 3) {
                 $query->bindValue(':shipDate', null, PDO::PARAM_NULL);
             } else {
                 $currentDate = date('Y-m-d');

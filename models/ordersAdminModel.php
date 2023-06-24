@@ -46,7 +46,10 @@ class ordersAdminModel extends Model
                     case 2:
                         $status = 2;
                         break;
-                    default:
+                        case 3:
+                            $status = 3;
+                            break;
+                        default:
                         $status = -1;
                         break;
                 }
@@ -54,14 +57,18 @@ class ordersAdminModel extends Model
                 switch ($row['status']) {
                     case 0:
                         $status = 0;
-                        $statusClass = 'status-primary';
+                        $statusClass = 'status-first';
                         break;
                     case 1:
                         $status = 1;
-                        $statusClass = 'status-success';
+                        $statusClass = 'status-primary';
                         break;
                     case 2:
                         $status = 2;
+                        $statusClass = 'status-success';
+                        break;
+                    case 3:
+                        $status = 3;
                         $statusClass = 'status-danger';
                         break;
                     default:

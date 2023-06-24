@@ -59,17 +59,22 @@ td{
     width: 100%;
 }
 
-.status-primary-span {
+.status-first span {
+    background-color: rgb(75, 198, 75);
+    color: white;
+}
+
+.status-primary span {
     background-color: #F1B210;
     color: white;
 }
 
-.status-success-span {
+.status-success span {
     background-color: #109CF1;
     color: white;
 }
 
-.status-danger-span {
+.status-danger span {
     background-color: #F11061;
     color: white;
 }
@@ -114,10 +119,14 @@ td{
     color: #fff;
   }
   
-  .select-en-curso {
-    background-color: #F1B210; /* Color de fondo para estado "En curso" */
+  .select-pendiente {
+    background-color: #F1B210; /* Color de fondo para estado "Pendiente" */
   }
   
+  .select-en-curso {
+    background-color: rgb(75, 198, 75); /* Color de fondo para estado "En curso" */
+  }
+
   .select-entregado {
     background-color: #109CF1; /* Color de fondo para estado "Entregado" */
   }
@@ -126,6 +135,9 @@ td{
     background-color: #F11061; /* Color de fondo para estado "Cancelado" */
   }
 
+  .select-pendiente option:not(:checked){
+    background-color: #fff; /* Color de fondo para estado "Pendiente" */
+  }
   .select-en-curso option:not(:checked) {
     background-color: #fff; /* Fondo blanco para opciones no seleccionadas en estado "En curso" */
 }
