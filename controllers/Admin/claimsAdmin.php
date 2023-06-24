@@ -14,5 +14,17 @@ class claimsAdmin extends Controller
         $this->view->render('Admin/ClaimsAdmin');
     }
 
+    function edit($idClaim)
+    {
+        $data = $_POST;
+
+        if (isset($data['status'])) {
+            $this->loadModel("claim");
+            $this->model->updateClaimStatus($idClaim, $data['status']);
+        }
+
+        header("Location: " . constant('URL') . "admin/claimsAdmin");
+    }
+
     
 }

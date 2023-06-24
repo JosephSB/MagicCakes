@@ -55,7 +55,7 @@ $BASE_URL = constant('URL') . "public";
                                     </td>
                                     <td class="align-middle">
                                         <form
-                                            action="<?php echo constant('URL'); ?>admin/claimsAdmin/edit/<?php echo $claim['claim_id']; ?>"
+                                            action="<?php echo constant('URL'); ?>admin/claimsAdmin/edit/<?php echo $claim['id']; ?>"
                                             method="POST">
                                             <div class="input-group">
                                                 <select

@@ -31,6 +31,25 @@
             }
         }
 
+        public function updateClaimStatus($claimId, $status){
+            try {
+                $pdo = $this->db->connect();
+                $pdo->beginTransaction();
+                $query = $pdo->prepare('UPDATE contact_us SET status = :status WHERE id = :id');
+                $query->bindValue(':status', $status, PDO::PARAM_INT);
+                $query->bindValue(':id', $claimId, PDO::PARAM_INT);
+                $query->execute();
+
+                $pdo->commit();
+                return true;
+
+            } catch (PDOException $e) {
+                $pdo->rollback();
+                //echo "Error al actualizar el estado de la orden: " . $e->getMessage();
+                return false;
+            }
+        }
+
         
     }
 
