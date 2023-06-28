@@ -1,5 +1,179 @@
 .admin-home{
     width: 100%;
     padding: 1rem;
-    padding-top: 0;
+    padding-top: 20px;
 }
+
+.container-card {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #icon1 {
+    color: purple;
+  
+  }
+  
+  #icon2 {
+    color: green;
+  }
+  
+  #icon3 {
+    color: rgb(127, 223, 255);
+  }
+  
+  #icon4 {
+    color: red;
+  }
+  
+  
+  .card {
+    display: flex;
+    width: 250px;
+    height: 80px;
+    background-color: #edeaea;
+    padding: 10px;
+    border-radius: 15px;
+    align-items: center;
+  }
+  
+  .card-left {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+  }
+  
+  .card-right {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card i {
+    font-size: 40px;
+    align-items: center;
+  
+  }
+  
+  .card h3 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 16px;
+  }
+  
+  .card p.number {
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .tarjeta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    margin-top: 10px;
+    background-color: #f0e9e9f0;
+    width: 100%;
+    border-radius: 15px;
+    justify-content: space-between;
+    padding: 10px;
+  
+  }
+  
+  .tarjeta img {
+    width: 80px;
+    height: auto;
+    border-radius: 15px;
+    margin-right: 10px;
+  
+  
+  }
+  
+  .informacion {
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  .informacion h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 15px;
+  }
+  
+  
+  .informacion p {
+    margin: 0;
+    font-size: 15px;
+  }
+  
+  .product-right{
+    
+    display: flex;
+    
+  }
+  
+  .product-left{
+    display: flex;
+    align-items: center;
+  }
+  
+  .precio {
+    font-weight: bold;
+    font-size: 15px;
+  }
+  
+  
+  
+  .container-products {
+    display: flex;
+    font-weight: normal;
+    margin-top:30px;
+    flex-direction: column;
+    width: 50%;
+  }
+  
+  
+  .container-top{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .titulo {
+    font-weight: bold;
+  
+    margin-right: 10px;
+  }
+  
+  .mes-selector {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  
+  
+  }
+  
+  .mes-selector-icon {
+    color: rgb(164, 164, 164);
+    padding-left: -1;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+  
+  .meses-container {
+  
+    padding-left: 550;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    padding: 5px;
+  }
+  
+  .mes {
+  
+    padding-left: 605;
+    cursor: pointer;
+  }
