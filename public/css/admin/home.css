@@ -2,6 +2,7 @@
     width: 100%;
     padding: 1rem;
     padding-top: 20px;
+    padding-right: 35px;
 }
 
 .container-card {
@@ -10,36 +11,40 @@
   }
   
   #icon1 {
-    color: purple;
-  
+    color: #4D2FC8;
+    border-color: #EBEFF2;
   }
   
   #icon2 {
-    color: green;
+    color: #36B268;
+    border-color: #EBEFF2;
   }
   
   #icon3 {
-    color: rgb(127, 223, 255);
+    color: #1C93EA;
+    border-color: #EBEFF2;
   }
   
   #icon4 {
-    color: red;
+    color: #C8382F;
+    border-color: #EBEFF2;
   }
   
   
   .card {
     display: flex;
     width: 250px;
-    height: 80px;
-    background-color: #edeaea;
+    height: 90px;
+    background-color: #F5F5F5;
     padding: 10px;
     border-radius: 15px;
     align-items: center;
+    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.4);
   }
   
   .card-left {
     display: flex;
-    width: 33%;
+    width: 40%;
     justify-content: center;
   }
   
@@ -51,7 +56,9 @@
   .card i {
     font-size: 40px;
     align-items: center;
-  
+    border-radius: 50%;
+    border: solid ;
+    padding: 10px;
   }
   
   .card h3 {
@@ -66,16 +73,21 @@
     font-size: 20px;
   }
   
+.home-bottom{
+  display: flex;
+}
+
   .tarjeta {
     display: flex;
     align-items: center;
     margin-bottom: 7px;
     margin-top: 10px;
-    background-color: #f0e9e9f0;
+    background-color: white;
     width: 100%;
     border-radius: 15px;
     justify-content: space-between;
     padding: 10px;
+    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.4);
   
   }
   
@@ -97,13 +109,13 @@
   .informacion h3 {
     margin-top: 0;
     margin-bottom: 5px;
-    font-size: 15px;
+    font-size: 13px;
   }
   
   
   .informacion p {
     margin: 0;
-    font-size: 15px;
+    font-size: 13px;
   }
   
   .product-right{
@@ -124,20 +136,36 @@
   
   
   
-  .container-products {
+  .container-products-ventas {
     display: flex;
     font-weight: normal;
-    margin-top:30px;
     flex-direction: column;
     width: 50%;
+    margin-top: 60px;
   }
   
+  .container-products-ventas:first-of-type{
+    margin-right: 15px;
+  }
+
+  .container-products-ventas:last-of-type{
+    margin-left: 15px;
+  }
   
   .container-top{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
   }
   
+  .mes-selector span:first-of-type{
+    color: #6A707E;
+    padding: 0 20px;
+  }
+
+  #mes-seleccionado{
+    color: #1C93EA;
+  }
   
   .titulo {
     font-weight: bold;
@@ -150,15 +178,13 @@
     display: inline-flex;
     align-items: center;
     position: relative;
-  
-  
+    font-size: 13px;
   }
   
   .mes-selector-icon {
-    color: rgb(164, 164, 164);
-    padding-left: -1;
+    color: #6A707E;
     margin-left: 5px;
-    font-size: 12px;
+    font-size: 10px;
   }
   
   .meses-container {
