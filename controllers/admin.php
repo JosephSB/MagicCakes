@@ -11,7 +11,21 @@
         }
 
         function render(){
-            $this->view->Render('Admin/index');
+            $this->loadModel('home');
+
+            $products = $this->model->getActiveProducts();
+            $this->view->products = $products;
+
+            $orders = $this->model->getStatusOrders();
+            $this->view->orders = $orders;
+
+            $delivery = $this->model->getStatusDelivery();
+            $this->view->delivery = $delivery;
+
+            $claims = $this->model->getClaimsStatus();
+            $this->view->claims = $claims;
+            
+            $this->view->render('Admin/index');
         }
 
         public function productsAdmin($params = []){

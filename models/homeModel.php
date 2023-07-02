@@ -1,5 +1,5 @@
 <?php
-class homeModel extends models
+class homeModel extends Model
 {
     function __construct()
     {
@@ -20,31 +20,45 @@ class homeModel extends models
         }
     }
 
-    public function getStatusOrders($user_id)
+    public function getStatusOrders()
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT status, COUNT(*) AS total_productos
-        FROM orders
-        WHERE status = 0 OR status = 1
-        GROUP BY status;');
+            $query = $this->db->connect()->prepare('SELECT SUM(total_productos) AS total FROM (
+                SELECT COUNT(*) AS total_productos
+                FROM orders
+                WHERE status = 0 OR status = 1
+                GROUP BY status
+            ) AS subquery;');
             $query->execute();
-            $order = [];
-            while ($row = $query->fetch()) {
-                $order = [
-                    'total' => $row['total_productos'],
-                    'status' => $row['status'],
-                ];
-            }
-            return $order;
+            $row = $query->fetch();
+            return $row['total'];
         } catch (PDOException $e) {
             //echo $e;
-            return [];
+            return 0;
         }
     }
+
+    public function getStatusDelivery()
+    {
+        try {
+            $query = $this->db->connect()->prepare('SELECT COUNT(*) AS total_delivery FROM orders WHERE STATUS=1');
+            $query->execute();
+            while ($row = $query->fetch()) {
+                return $row['total_delivery'];
+            }
+            return 0;
+        } catch (PDOException $e) {
+            //echo $e;
+            return 0;
+        }
+    }
+    
+
+
     public function getClaimsStatus()
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT COUNT(*)as total FROM orders WHERE status=0');
+            $query = $this->db->connect()->prepare('SELECT COUNT(*)as total FROM contact_us WHERE status=0');
             $query->execute();
             while ($row = $query->fetch()) {
                 return $row['total'];

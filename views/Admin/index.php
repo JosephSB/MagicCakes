@@ -22,7 +22,7 @@
     </div>
     <div class="card-right">
       <h3>PRODUCTOS</h3>
-      <p class="number">15</p>
+      <p class="number"><?php echo $this->products; ?></p>
     </div>
   </div>
 
@@ -32,7 +32,7 @@
     </div>
     <div class="card-right">
       <h3>ORDENES</h3>
-      <p class="number">8</p>
+      <p class="number"><?php echo $this->orders; ?></p>
     </div>
   </div>
 
@@ -42,7 +42,7 @@
     </div>
     <div class="card-right">
       <h3> EN CAMINO</h3>
-      <p class="number">2</p>
+      <p class="number"><?php echo $this->delivery; ?></p>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
     </div>
     <div class="card-right">
       <h3>RECLAMOS</h3>
-      <p class="number">2</p>
+      <p class="number"><?php echo $this->claims; ?></p>
     </div>
   </div>
 </div>
