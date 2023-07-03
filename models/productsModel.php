@@ -88,6 +88,45 @@ class productsModel extends Model
         }
     }
 
+
+    public function getMyFavs($userID)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    SELECT 
+                        p.product_id, p.title, p.description, p.urllmage, p.price, p.stock, p.status, p.updated, p.created
+                    FROM products_favs pf
+                    INNER JOIN products p on p.product_id = pf.product_id
+                    WHERE p.status = 1 and pf.user_id = :userID;
+                '
+            );
+            $query->execute([
+                'userID' => $userID,
+            ]);
+            $arr_products = array();
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'id' => $row['product_id'],
+                    'title' => $row['title'],
+                    'description' => $row['description'],
+                    'urllmage' => $row['urllmage'],
+                    'price' => $row['price'],
+                    'stock' => $row['stock'],
+                    'status' => $row['status'],
+                    'updated' => $row['updated'],
+                    'created' => $row['created']
+                );
+                array_push($arr_products, $products);
+            }
+            return $arr_products;
+        } catch (PDOException $e) {
+            echo $e;
+            return [];
+        }
+    }
+
+
     public function getDetailsProducts($id)
     {
 

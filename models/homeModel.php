@@ -52,7 +52,7 @@ class homeModel extends Model
             return 0;
         }
     }
-    
+
 
 
     public function getClaimsStatus()
@@ -69,5 +69,44 @@ class homeModel extends Model
             return 0;
         }
     }
+
+
+    public function getProductSell($month)
+{
+    try {
+        $query = $this->db->connect()->prepare('
+        SELECT 
+        p.title, 
+        p.urllmage, 
+        p.description,
+        COUNT(*) AS total_ventas
+        FROM 
+        orders AS o
+        INNER JOIN products_orders AS po ON o.order_id = po.order_id
+        INNER JOIN products p ON p.product_id = po.product_id
+        WHERE MONTH(o.created) = :month
+        GROUP BY p.title, p.urllmage, p.description
+        ORDER BY total_ventas DESC;
+        ');
+        $query->bindParam(':month', $month, PDO::PARAM_INT);
+        $query->execute();
+
+        $productsSell = [];
+        while ($row = $query->fetch()) {
+            $produtcssell = [
+                'title' => $row['title'],
+                'urllmage' => $row['urllmage'],
+                'description' => $row['description'],
+                'total_ventas' => $row['total_ventas'],
+            ];
+            array_push($productsSell, $produtcssell);
+        }
+        return $productsSell;
+    } catch (PDOException $e) {
+        //echo $e
+        return [];
+    }
+}
+
 }
 ?>

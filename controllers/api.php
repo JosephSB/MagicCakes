@@ -33,6 +33,15 @@
             else $controler-> {$params[0]}($params);
         }
 
+        public function admin($params){
+            require_once 'api/admin.api.php';
+            $controler = new AdminApi();
+            $controler->loadModel('home');
+            if(isset($params[1])) $controler-> {$params[0]}($params[1]);
+            else $controler-> {$params[0]}($params);
+        }
+
+
     }
 
 ?>
