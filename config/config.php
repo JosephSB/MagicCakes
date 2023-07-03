@@ -2,7 +2,7 @@
 
     define('URL', 'http://localhost/MagicCakes/');
     //-------------DB--------------
-    define('HOST', 'localhost:33065');
+    define('HOST', 'localhost');
     define('DB', 'magiccakes_db');
     define('USER', 'root');
     define('PASSWORD', "");
