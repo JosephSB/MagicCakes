@@ -19,45 +19,47 @@ $BASE_URL = constant('URL') . "public";
         <div class="container-offers">
 
             <div class="container-bottom">
-                <?php if (!empty($this->orders)): ?>
-                    <?php foreach ($this->orders as $orders): ?>
-                        <div class="card-product" data-productid="<?php echo $orders['id']; ?>">
-                            <div class="card-product-containerImg">
-                                <i class="fa-solid fa-heart card-product-icon active"
-                                    data-id="<?php echo $orders['id']; ?>"></i>
-                                <img class="card-product-img" src="<?php echo $orders['image']; ?>">
+                <div class="container-cards-offers" id="containerProducts">
+                    <?php if (!empty($this->orders)): ?>
+                        <?php foreach ($this->orders as $orders): ?>
+                            <div class="card-product" data-productid="<?php echo $orders['id']; ?>">
+                                <div class="card-product-containerImg">
+                                    <i class="fa-solid fa-heart card-product-icon active"
+                                        data-id="<?php echo $orders['id']; ?>"></i>
+                                    <img class="card-product-img" src="<?php echo $orders['image']; ?>">
+                                </div>
+                                <div class="card-product-body">
+                                    <?php if (!$orders['stock'] || $orders['stock'] === 0): ?>
+                                        <div class="card-product-spam card-product-spam-err">
+                                            <p>Sin stock</p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($orders['stock'] > 0 && $orders['stock'] < 10): ?>
+                                        <div class="card-product-spam card-product-spam-medium">
+                                            <p>Ultimos productos</p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <p class="card-product-title">
+                                        <?php echo $orders['title']; ?>
+                                    </p>
+                                    <p class="card-product-description">
+                                        <?php echo strlen($orders['description']) > 100 ? substr($orders['description'], 0, 100) . "..." : $orders['description']; ?>
+                                    </p>
+                                    <p class="card-product-price">
+                                        <?php echo ($orders['price']); ?>
+                                    </p>
+                                    <a href="<?php echo '/products/detail/' . $orders['id']; ?>">
+                                        <button class="card-product-btn">COMPRAR</button>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="card-product-body">
-                                <?php if (!$orders['stock'] || $orders['stock'] === 0): ?>
-                                    <div class="card-product-spam card-product-spam-err">
-                                        <p>Sin stock</p>
-                                    </div>
-                                <?php endif; ?>
-                                <?php if ($orders['stock'] > 0 && $orders['stock'] < 10): ?>
-                                    <div class="card-product-spam card-product-spam-medium">
-                                        <p>Ultimos productos</p>
-                                    </div>
-                                <?php endif; ?>
-                                <p class="card-product-title">
-                                    <?php echo $orders['title']; ?>
-                                </p>
-                                <p class="card-product-description">
-                                    <?php echo strlen($orders['description']) > 100 ? substr($orders['description'], 0, 100) . "..." : $orders['description']; ?>
-                                </p>
-                                <p class="card-product-price">
-                                    <?php echo ($orders['price']); ?>
-                                </p>
-                                <a href="<?php echo '/products/detail/' . $orders['id']; ?>">
-                                    <button class="card-product-btn">COMPRAR</button>
-                                </a>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                    <?php endif; ?>
+                </div>
+
+
             </div>
-
-
         </div>
     </div>
     <?php require 'views/components/footer.php'; ?>

@@ -110,7 +110,7 @@ class productsModel extends Model
                     'id' => $row['product_id'],
                     'title' => $row['title'],
                     'description' => $row['description'],
-                    'urllmage' => $row['urllmage'],
+                    'image' => $row['urllmage'],
                     'price' => $row['price'],
                     'stock' => $row['stock'],
                     'status' => $row['status'],
