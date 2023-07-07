@@ -116,12 +116,14 @@
   .informacion p {
     margin: 0;
     font-size: 13px;
+    text-align: justify;
   }
   
   .product-right{
     
     display: flex;
-    
+    width: 65%;
+    justify-content: flex-end;
   }
   
   .product-left{
@@ -202,4 +204,15 @@
   
     padding-left: 605;
     cursor: pointer;
+  }
+
+  .mes-selector #select{
+    border: none;
+  }
+  .mes-selector select{
+    color: #1C93EA;
+  }
+
+  .mes-selector #select option{
+    color: black;
   }
