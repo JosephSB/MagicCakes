@@ -26,6 +26,7 @@
                         <p id="inputRangeName">Ordernar por</p>
                         <i class="fa-solid fa-angle-down"></i>
                         <div class="input-range-options" id="inputRangeOptions">
+                            <p class="input-range-option" id="option-0">Todos</p>
                             <p class="input-range-option" id="option-1">Los mas populares</p>
                             <p class="input-range-option" id="option-2">De menor a mayor precio</p>
                             <p class="input-range-option" id="option-3">De mayor a menor precio</p>

@@ -37,7 +37,7 @@ $BASE_URL = constant('URL') . "public";
                 <input type="text" placeholder="Apellido" name="lastname" require>
             </div>
             <div class="input-contenedor">
-                <input type="number" placeholder="Celular" name="number" require>
+                <input type="number" oninput="limitarMaximoCaracteres(this, 9)"  placeholder="Celular" name="number" require>
             </div>
             <div class="input-contenedor">
                 <input type="password" placeholder="Contraseña" name="password" require>
@@ -47,6 +47,13 @@ $BASE_URL = constant('URL') . "public";
             <p>¿Ya tienes una cuenta? <a class="link" href="<?php echo  constant('URL'); ?>login">Inicia Sesion </a></p>
         </div>
     </form>
+    <script>
+        function limitarMaximoCaracteres(elemento, maximoCaracteres) {
+            if (elemento.value.length > maximoCaracteres) {
+                elemento.value = elemento.value.slice(0, maximoCaracteres);
+            }
+        }
+    </script>
 </body>
 
 </html>
