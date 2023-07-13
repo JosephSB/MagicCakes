@@ -29,6 +29,30 @@ const getItemsFromMyCart = async () => {
     }
 }
 
+const validateStock = async (data) => {
+    const options = {
+        method: "POST",
+        body: data ? JSON.stringify(data) : JSON.stringify({}),
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    try {
+
+        const res = await fetch(`${URL_WEB}/api/cart/validateStock`, options) /*NO ENTIENOD*/
+        const data = await res.json()
+
+        if(data.status === 200){
+            return data.operation
+        }
+
+        return false
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
+
 const updateItemFromCart = async (data) => {
     const options = {
         method: "POST",
@@ -75,7 +99,7 @@ const removeItemFromMyCart = async (ItemID) => {
 }
 
 
-const ShoopingCartItem = (image, title, price, ammount, id) => {
+const ShoopingCartItem = (image, title, price, ammount, id, idproduct) => {
     return `
         <div class="shoppingcart-item" data-id="${id}">
             <img class="image" src="${image}" alt="${title}">
@@ -87,9 +111,9 @@ const ShoopingCartItem = (image, title, price, ammount, id) => {
                 <div class="body-2">
                     <p>cantidad</p>
                     <div>
-                        <button class="boton-cantidad" data-action="less" data-id="${id}">-</button>
+                        <button class="boton-cantidad" data-action="less" data-pid="${idproduct}" data-id="${id}">-</button>
                         <input class="input-ammout" type="text" data-id="${id}" readonly value="${ammount}" min="1" />
-                        <button class="boton-cantidad" data-action="more" data-id="${id}">+</button>
+                        <button class="boton-cantidad" data-action="more" data-pid="${idproduct}" data-id="${id}">+</button>
                     </div>
                 </div>
                 <div class="body-2">
@@ -129,8 +153,9 @@ const ListenEachCartItem = () => {
         })
     } )
     document.querySelectorAll(".boton-cantidad").forEach( itemBtn => {
-        itemBtn.addEventListener("click", () => {
+        itemBtn.addEventListener("click", async () => {
             const idItem = itemBtn.dataset.id;
+            const idProduct = itemBtn.dataset.pid;
             const action = itemBtn.dataset.action;
             let inputAmmount = null;
             let textPrice = null;
@@ -151,6 +176,13 @@ const ListenEachCartItem = () => {
                 if(newAmmount > 1) newAmmount = newAmmount - 1
             }
 
+            //validar stock
+            const resp = action === "more" ? await validateStock({productID: idProduct, ammount: newAmmount}) : true
+            if(!resp) {
+                showAlert("Producto sin stock", "fa-solid fa-xmark", "#FF7675")
+                return
+            }
+
             textPrice.innerText = formatoMonedaSoles(parseFloat(textPrice.dataset.unitprice) * newAmmount )
             inputAmmount.value = newAmmount;
             calculateSummary()
@@ -166,7 +198,7 @@ const DrawListItems = async () => {
     Loader.classList.remove = "d-none"
     const {data, total} = await getItemsFromMyCart()
     if(data.length === 0)  ContainerItemShoppinCart.innerHTML += `<p class="title-noproducts">Sin productos en el carrito</p>`
-    data.map( (item) =>  ContainerItemShoppinCart.innerHTML += ShoopingCartItem(item.urllmage,item.title, item.price,item.ammount, item.itemID ) )
+    data.map( (item) =>  ContainerItemShoppinCart.innerHTML += ShoopingCartItem(item.urllmage,item.title, item.price,item.ammount, item.itemID, item.id) )
     calculateSummary()
     ListenEachCartItem()
 }

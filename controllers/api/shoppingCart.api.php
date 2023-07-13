@@ -62,6 +62,22 @@
 
         }
 
+        public function validateStock() {
+            $data = json_decode(file_get_contents('php://input'), true);
+            $ammount = isset($data['ammount']) ? $data['ammount'] : 0;
+            $item_id = isset($data['productID']) ? $data['productID'] : "";
+
+            $respStock = $this->model->getStockOfProduct($item_id);
+            $stock = isset($respStock) ? intval($respStock) : 0;
+
+            if( (intval($stock) - intval($ammount)) < 0 ){
+                echo $this->sendJson("No hay stock suficiente del producto", false);
+                return;
+            }
+
+            echo $this->sendJson("stock valido", true);
+        }
+
         public function updateProduct(){
             session_start();
 

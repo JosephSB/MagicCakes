@@ -34,17 +34,24 @@
                             <input type="email" placeholder="Correo Electronico" name="email" require />
                         </div>
                         <div class="input-container">
-                            <input type="number" placeholder="Celular" name="number" require />
+                            <input type="number" oninput="limitarMaximoCaracteres(this, 9)" placeholder="Celular" name="number" require />
                         </div>
                         <div class="input-container">
                             <textarea name="area_message" placeholder="Déjanos un mensaje" cols="30" rows="10" style="width: 100%; height: 103px;"></textarea>
                         </div>
-                        <input type="submit" value="ENVIAR" class="button" />
                         <p class="text-error"><?php echo $this->message; ?></p>
+                        <input type="submit" value="ENVIAR" class="button" />
                     </div>
                 </form>
             </div>
         </div>
         <?php require 'views/components/footer.php';  ?>
     </body>
+    <script>
+        function limitarMaximoCaracteres(elemento, maximoCaracteres) {
+            if (elemento.value.length > maximoCaracteres) {
+                elemento.value = elemento.value.slice(0, maximoCaracteres);
+            }
+        }
+    </script>
 </html>
