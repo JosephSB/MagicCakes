@@ -38,11 +38,8 @@ const CardProduct = (urllmage, title, description, total_ventas) => {
 
       <div class="informacion">
         <h3>
-          ${title}
+          ${title.toUpperCase()}
         </h3>
-        <p>
-        ${description}
-        </p>
       </div>
     </div>
     <div class="product-right">

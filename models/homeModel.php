@@ -110,11 +110,11 @@ class homeModel extends Model
 public function getSaleDayMonths() {
     try {
         $result = [];  // Arreglo para almacenar los resultados
-        $query = $this->db->connect()->prepare("SELECT DATE_FORMAT(created, '%Y-%m-%d') AS dia, MONTH(created) AS mes, SUM(totalGrossPrice) AS ventas_diarias FROM orders GROUP BY dia, mes ORDER BY dia ASC;");
+        $query = $this->db->connect()->prepare("SELECT DATE_FORMAT(created, '%Y-%m-%d') AS dia, MONTH(created) AS mes, SUM(totalGrossPrice) AS ventas_diarias FROM orders WHERE YEAR(created) = YEAR(CURRENT_DATE()) GROUP BY dia, mes ORDER BY dia DESC LIMIT 10");
         $query->execute();
         while ($row = $query->fetch()) {
             $result[] = [
-                'dia' => $row['dia'],
+                //'dia' => $row['dia'],
                 'mes' => $row['mes'],
                 'ventas_diarias' => $row['ventas_diarias']
             ];
@@ -128,4 +128,3 @@ public function getSaleDayMonths() {
 
 
 }
-?>

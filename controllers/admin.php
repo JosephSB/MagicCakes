@@ -28,6 +28,9 @@ class Admin extends Controller
         $claims = $this->model->getClaimsStatus();
         $this->view->claims = $claims;
 
+        $dataGraphic = $this->model->getSaleDayMonths();
+        $this->view->dataGraphic = base64_encode(json_encode($dataGraphic));
+
         // Obtener el valor seleccionado del SELECT
         //$month = $_POST['mes'];
 

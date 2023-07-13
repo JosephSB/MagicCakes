@@ -1,218 +1,218 @@
-.admin-home{
-    width: 100%;
-    padding: 1rem;
-    padding-top: 20px;
-    padding-right: 35px;
+.admin-home {
+  width: 100%;
+  padding: 1rem;
+  padding-top: 20px;
+  /*padding-right: 35px;*/
 }
 
 .container-card {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  #icon1 {
-    color: #4D2FC8;
-    border-color: #EBEFF2;
-  }
-  
-  #icon2 {
-    color: #36B268;
-    border-color: #EBEFF2;
-  }
-  
-  #icon3 {
-    color: #1C93EA;
-    border-color: #EBEFF2;
-  }
-  
-  #icon4 {
-    color: #C8382F;
-    border-color: #EBEFF2;
-  }
-  
-  
-  .card {
-    display: flex;
-    width: 250px;
-    height: 90px;
-    background-color: #F5F5F5;
-    padding: 10px;
-    border-radius: 15px;
-    align-items: center;
-    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.4);
-  }
-  
-  .card-left {
-    display: flex;
-    width: 40%;
-    justify-content: center;
-  }
-  
-  .card-right {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .card i {
-    font-size: 40px;
-    align-items: center;
-    border-radius: 50%;
-    border: solid ;
-    padding: 10px;
-  }
-  
-  .card h3 {
-    margin: 0;
-    font-weight: normal;
-    font-size: 16px;
-  }
-  
-  .card p.number {
-    margin: 0;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
-.home-bottom{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1rem;
 }
 
-  .tarjeta {
-    display: flex;
-    align-items: center;
-    margin-bottom: 7px;
-    margin-top: 10px;
-    background-color: white;
-    width: 100%;
-    border-radius: 15px;
-    justify-content: space-between;
-    padding: 10px;
-    box-shadow: -1px 2px 4px 0px rgba(0, 0, 0, 0.4);
-  
-  }
-  
-  .tarjeta img {
-    width: 80px;
-    height: auto;
-    border-radius: 15px;
-    margin-right: 10px;
-  
-  
-  }
-  
-  .informacion {
-    display: flex;
-    flex-direction: column;
-  
-  }
-  
-  .informacion h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size: 13px;
-  }
-  
-  
-  .informacion p {
-    margin: 0;
-    font-size: 13px;
-    text-align: justify;
-  }
-  
-  .product-right{
-    
-    display: flex;
-    width: 65%;
-    justify-content: flex-end;
-  }
-  
-  .product-left{
-    display: flex;
-    align-items: center;
-  }
-  
-  .precio {
-    font-weight: bold;
-    font-size: 15px;
-  }
-  
-  
-  
-  .container-products-ventas {
-    display: flex;
-    font-weight: normal;
-    flex-direction: column;
-    width: 50%;
-    margin-top: 60px;
-  }
-  
-  .container-products-ventas:first-of-type{
-    margin-right: 15px;
-  }
+#icon1 {
+  color: #4D2FC8;
+  border-color: #EBEFF2;
+}
 
-  .container-products-ventas:last-of-type{
-    margin-left: 15px;
-  }
-  
-  .container-top{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .mes-selector span:first-of-type{
-    color: #6A707E;
-    padding: 0 20px;
-  }
+#icon2 {
+  color: #36B268;
+  border-color: #EBEFF2;
+}
 
-  #mes-seleccionado{
-    color: #1C93EA;
-  }
-  
-  .titulo {
-    font-weight: bold;
-  
-    margin-right: 10px;
-  }
-  
-  .mes-selector {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    font-size: 13px;
-  }
-  
-  .mes-selector-icon {
-    color: #6A707E;
-    margin-left: 5px;
-    font-size: 10px;
-  }
-  
-  .meses-container {
-  
-    padding-left: 550;
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    padding: 5px;
-  }
-  
-  .mes {
-  
-    padding-left: 605;
-    cursor: pointer;
-  }
+#icon3 {
+  color: #1C93EA;
+  border-color: #EBEFF2;
+}
 
-  .mes-selector #select{
-    border: none;
-  }
-  .mes-selector select{
-    color: #1C93EA;
-  }
+#icon4 {
+  color: #C8382F;
+  border-color: #EBEFF2;
+}
 
-  .mes-selector #select option{
-    color: black;
-  }
+
+.card {
+  display: flex;
+  width: 100%;
+  height: 90px;
+  background-color: #F5F5F5;
+  padding: 10px;
+  border-radius: 5px;
+  align-items: center;
+  box-shadow: 0 4px 13px #e9e9f9;
+}
+
+.card-left {
+  display: flex;
+  width: 40%;
+  justify-content: center;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.card i {
+  font-size: 40px;
+  align-items: center;
+  border-radius: 50%;
+  border: solid;
+  padding: 10px;
+}
+
+.card h3 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+.card p.number {
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.home-bottom {
+  width: 100%;
+  /*display: grid;
+  grid-template-columns: 1.4fr 1fr ;*/
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 0;
+  gap: 1rem;
+
+}
+
+.tarjeta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+  margin-top: 10px;
+  background-color: white;
+  width: 100%;
+  border-radius: 5px;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0 4px 13px #e9e9f9;
+
+}
+
+.tarjeta img {
+  width: 80px;
+  height: auto;
+  border-radius: 15px;
+  margin-right: 10px;
+
+
+}
+
+.informacion {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.informacion h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+
+.informacion p {
+  margin: 0;
+  font-size: 13px;
+  text-align: justify;
+}
+
+.product-right {
+
+  display: flex;
+  width: 65%;
+  justify-content: flex-end;
+}
+
+.product-left {
+  display: flex;
+  align-items: center;
+}
+
+.precio {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+
+
+.container-products-ventas {
+  display: flex;
+  font-weight: normal;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.mes-selector span:first-of-type {
+  color: #6A707E;
+  padding: 0 20px;
+}
+
+#mes-seleccionado {
+  color: #1C93EA;
+}
+
+.titulo {
+  font-weight: bold;
+
+  margin-right: 10px;
+}
+
+.mes-selector {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  font-size: 13px;
+}
+
+.mes-selector-icon {
+  color: #6A707E;
+  margin-left: 5px;
+  font-size: 10px;
+}
+
+.meses-container {
+
+  padding-left: 550;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  padding: 5px;
+}
+
+.mes {
+
+  padding-left: 605;
+  cursor: pointer;
+}
+
+.mes-selector #select {
+  border: none;
+}
+
+.mes-selector select {
+  color: #1C93EA;
+}
+
+.mes-selector #select option {
+  color: black;
+}
