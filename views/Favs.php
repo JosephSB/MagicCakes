@@ -46,7 +46,7 @@ $BASE_URL = constant('URL') . "public";
                                         <?php echo strlen($orders['description']) > 100 ? substr($orders['description'], 0, 100) . "..." : $orders['description']; ?>
                                     </p>
                                     <p class="card-product-price">
-                                        <?php echo ($orders['price']); ?>
+                                        s/&nbsp;<?php echo (number_format($orders['price'], 2, '.', '.')); ?>
                                     </p>
                                     <a href="<?php echo '/products/detail/' . $orders['id']; ?>">
                                         <button class="card-product-btn">COMPRAR</button>
@@ -64,6 +64,9 @@ $BASE_URL = constant('URL') . "public";
     </div>
     <?php require 'views/components/footer.php'; ?>
     <script src="<?php echo $BASE_URL; ?>/js/favorites.js"></script>
+    <script>
+        listenAllBtnsFav()
+    </script>
 </body>
 
 </html>
