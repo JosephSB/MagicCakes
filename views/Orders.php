@@ -46,9 +46,6 @@
                         </div>
                         </div>
                         <div class="right-body">
-                        <div class="card-footer">
-                            <button class="card-button card-button-primary">Ver Compra</button>
-                        </div>
                         </div>
                     </div>
                     
