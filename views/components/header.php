@@ -9,9 +9,9 @@
         </a>
 
         <ul>
-            <li><a class="navegacion" href="<?php echo  constant('URL'); ?>products">Promociones</a></li>
-            <li><a class="navegacion" href="<?php echo  constant('URL'); ?>products">Nuestra Carta</a></li>
             <li><a class="navegacion" href="<?php echo  constant('URL'); ?>stores">Nuestras tiendas</a></li>
+            <li><a class="navegacion" href="<?php echo  constant('URL'); ?>products">Nuestra Carta</a></li>
+            <li><a class="navegacion" href="<?php echo  constant('URL'); ?>orders">Mis Ordenes</a></li>
         </ul>
         <div class="icon-right">
             <a href="<?php echo  constant('URL'); ?>favs">

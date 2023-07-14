@@ -48,7 +48,7 @@ $BASE_URL = constant('URL') . "public";
                                     <p class="card-product-price">
                                         s/&nbsp;<?php echo (number_format($orders['price'], 2, '.', '.')); ?>
                                     </p>
-                                    <a href="<?php echo '/products/detail/' . $orders['id']; ?>">
+                                    <a href="<?php echo constant('URL').'/products/detail/' . $orders['id']; ?>">
                                         <button class="card-product-btn">COMPRAR</button>
                                     </a>
                                 </div>

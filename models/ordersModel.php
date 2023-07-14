@@ -27,7 +27,7 @@ class ordersModel extends Model
             $orders = array();
 
             while ($row = $query->fetch()) {
-                $status = $row['status'] == 0 ? 'En proceso' : ($row['status'] == 1 ? 'Entregado' : 'Anulado');
+                $status = $row['status'] == 0 ? 'Pendiente' : ($row['status'] == 1 ? 'En proceso' : ($row['status'] == 2 ? 'Entregado' :  'Anulado'));
                 $created = $this->formatSpanishDate($row['created']); // Formatear la fecha en español
                 $shipDate = $row['shipDate'] ? 'Llegó el ' . $this->formatSpanishDate($row['shipDate']) : ($status == 'Anulado' ? 'Pedido anulado' : 'Se entregará pronto');
 
@@ -208,9 +208,7 @@ class ordersModel extends Model
             $query = $pdo->prepare('UPDATE orders SET status = :status, shipDate = :shipDate WHERE order_id = :order_id');
             $query->bindValue(':status', $status, PDO::PARAM_INT);
 
-            if ($status == 1) {
-                $query->bindValue(':shipDate', null, PDO::PARAM_NULL);
-            } else if ($status == 3) {
+            if ($status == 0 || $status == 1 || $status == 3) {
                 $query->bindValue(':shipDate', null, PDO::PARAM_NULL);
             } else {
                 $currentDate = date('Y-m-d');
