@@ -42,7 +42,7 @@ class userModel extends Model
     {
         try {
             $query = $this->db->connect()->prepare('
-            SELECT COUNT(*) as count FROM users WHERE email = :email and status = 1
+            SELECT COUNT(*) as count FROM users WHERE email = :email and status = 1 AND isDelete=0
         ');
             $query->execute(['email' => $email]);
             $result = $query->fetch(PDO::FETCH_ASSOC);
@@ -59,8 +59,8 @@ class userModel extends Model
         try {
             $query = $this->db->connect()->prepare(
                 '
-                        SELECT * FROM users WHERE email = :email and status = 1
-                    '
+                    SELECT * FROM users WHERE email = :email and status = 1 AND isDelete=0
+                '
             );
             $query->execute([
                 'email' => $email,
@@ -90,5 +90,3 @@ class userModel extends Model
     }
     
 }
-
-?>

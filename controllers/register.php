@@ -44,6 +44,14 @@
                 return;
             }
 
+            $user = $this->model->findUserByEmail($data['email']);
+
+            if(empty($user) == false){
+                $this->view->message = 'El email ya esta registrado';
+                $this->view->Render('Auth/register');
+                return;
+            }
+
             if($validate -> validatePhone($data['number']) == false){
                 $this->view->message = 'Celular invalido';
                 $this->view->Render('Auth/register');

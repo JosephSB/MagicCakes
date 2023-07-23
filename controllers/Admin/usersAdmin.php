@@ -51,6 +51,14 @@ require './utils/ValidateCredentials.php';
                 return;
             }
 
+            $user = $this->model->findUserByEmail($data['email']);
+
+            if(empty($user) == false){
+                $this->view->message = 'El email ya esta registrado';
+                $this->view->Render('Admin/CreateUsers');
+                return;
+            }
+
             if($validate -> validatePhone($data['number']) == false){
                 $this->view->message = 'Celular invalido';
                 $this->view->Render('Admin/CreateUsers');
@@ -90,6 +98,13 @@ require './utils/ValidateCredentials.php';
                 return;
             }
             
+            $resp = $this->model->findUserByEmailExceptMe($data['email'], $idUser);
+
+            if(empty($resp) == false){
+                $this->view->message = 'El email ya esta registrado';
+                $this->view->Render('Admin/EditUser');
+                return;
+            }
 
             $resp = $this->model->editUsers($idUser, $data);
 

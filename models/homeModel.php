@@ -8,7 +8,7 @@ class homeModel extends Model
     public function getActiveProducts()
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT COUNT(*) as total  FROM products WHERE STATUS=1 AND stock>0;');
+            $query = $this->db->connect()->prepare('SELECT COUNT(*) as total  FROM products WHERE STATUS=1 AND stock>0 AND isDelete=0;');
             $query->execute();
             while ($row = $query->fetch()) {
                 return $row['total'];

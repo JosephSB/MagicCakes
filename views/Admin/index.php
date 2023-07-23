@@ -79,30 +79,32 @@ $BASE_URL = constant('URL') . "public";
                 <div class="mes-selector">
                   <span>Show:</span>
                   <select name="mes" class="box" id="select">
-                    <option value="1" <?php if (date('n') == 1)
-                                        echo 'selected'; ?>>Enero</option>
-                    <option value="2" <?php if (date('n') == 2)
-                                        echo 'selected'; ?>>Febrero</option>
-                    <option value="3" <?php if (date('n') == 3)
-                                        echo 'selected'; ?>>Marzo</option>
-                    <option value="4" <?php if (date('n') == 4)
-                                        echo 'selected'; ?>>Abril</option>
-                    <option value="5" <?php if (date('n') == 5)
-                                        echo 'selected'; ?>>Mayo</option>
-                    <option value="6" <?php if (date('n') == 6)
-                                        echo 'selected'; ?>>Junio</option>
-                    <option value="7" <?php if (date('n') == 7)
-                                        echo 'selected'; ?>>Julio</option>
-                    <option value="8" <?php if (date('n') == 8)
-                                        echo 'selected'; ?>>Agosto</option>
-                    <option value="9" <?php if (date('n') == 9)
-                                        echo 'selected'; ?>>Septiembre</option>
-                    <option value="10" <?php if (date('n') == 10)
-                                          echo 'selected'; ?>>Octubre</option>
-                    <option value="11" <?php if (date('n') == 11)
-                                          echo 'selected'; ?>>Noviembre</option>
-                    <option value="12" <?php if (date('n') == 12)
-                                          echo 'selected'; ?>>Diciembre</option>
+                    <?php
+                    $mesActual = date('n');
+                    $mesesEnEspanol = array(
+                      1 => 'Enero',
+                      2 => 'Febrero',
+                      3 => 'Marzo',
+                      4 => 'Abril',
+                      5 => 'Mayo',
+                      6 => 'Junio',
+                      7 => 'Julio',
+                      8 => 'Agosto',
+                      9 => 'Septiembre',
+                      10 => 'Octubre',
+                      11 => 'Noviembre',
+                      12 => 'Diciembre'
+                    );
+
+                    for ($mes = 1; $mes <= $mesActual; $mes++) {
+                      $nombreMes = $mesesEnEspanol[$mes];
+                      echo "<option value='$mes'";
+                      if ($mes === $mesActual) {
+                        echo ' selected';
+                      }
+                      echo ">$nombreMes</option>";
+                    }
+                    ?>
                   </select>
                 </div>
               </form>

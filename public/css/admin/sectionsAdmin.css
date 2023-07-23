@@ -106,7 +106,7 @@ td{
     background-color: var(--color-primary-hover);
 }
 
-#status{
+#status, #statusClaims{
     
         width: 50%;
         border: none;
@@ -115,7 +115,7 @@ td{
       
 }
 
-  select#status {
+  select#status,   select#statusClaims {
     color: #fff;
   }
   
@@ -149,7 +149,8 @@ td{
 .select-cancelado option:not(:checked) {
     background-color: #fff; /* Fondo blanco para opciones no seleccionadas en estado "Cancelado" */
 }
-#status option:not(:checked) {
+
+#status option:not(:checked), #statusClaims option:not(:checked) {
     color: #000; /* Color de letra en negro para las opciones no seleccionadas */
 }
 

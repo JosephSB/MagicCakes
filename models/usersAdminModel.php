@@ -10,7 +10,7 @@ class usersAdminModel extends Model
     public function getDetailUser($id)
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT * FROM users WHERE user_id = :id;');
+            $query = $this->db->connect()->prepare('SELECT * FROM users WHERE user_id = :id AND isDelete=0;');
             $query->execute(['id' => $id]);
             $arr_users = array();
             while ($row = $query->fetch()) {
@@ -36,7 +36,7 @@ class usersAdminModel extends Model
     public function getUsersAdmin()
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT user_id, role, CONCAT(name, " ", lastname) AS full_name, email, phone, address, status FROM users;');
+            $query = $this->db->connect()->prepare('SELECT user_id, role, CONCAT(name, " ", lastname) AS full_name, email, phone, address, status FROM users WHERE isDelete=0;');
             $query->execute();
             $users = array();
             while ($row = $query->fetch()) {
@@ -92,7 +92,7 @@ class usersAdminModel extends Model
     public function deleteUsers($idUser)
     {
         try {
-            $query = $this->db->connect()->prepare('DELETE FROM users WHERE user_id = :id');
+            $query = $this->db->connect()->prepare('UPDATE users SET isDelete = 1 WHERE user_id = :id');
             $query->execute([
                 'id' => $idUser
             ]);
@@ -100,6 +100,42 @@ class usersAdminModel extends Model
         } catch (PDOException $e) {
             //echo $e;
             return false;
+        }
+    }
+
+    public function findUserByEmailExceptMe($email, $userID)
+    {
+        try {
+            $query = $this->db->connect()->prepare(
+                '
+                    SELECT * FROM users WHERE email = :email AND user_id != :userID AND status = 1 AND isDelete=0
+                '
+            );
+            $query->execute([
+                'email' => $email,
+                'userID' => $userID
+            ]);
+
+            while ($row = $query->fetch()) {
+                $products = array(
+                    'user_id' => $row['user_id'],
+                    'role' => $row['role'],
+                    'name' => $row['name'],
+                    'lastname' => $row['lastname'],
+                    'email' => $row['email'],
+                    'phone' => $row['phone'],
+                    'address' => $row['address'],
+                    'password' => $row['password'],
+                    'status' => $row['status'],
+                    'urlProfile' => $row['urlProfile'],
+                );
+                return $products;
+            }
+
+            return [];
+        } catch (PDOException $e) {
+            //echo $e;
+            return [];
         }
     }
 

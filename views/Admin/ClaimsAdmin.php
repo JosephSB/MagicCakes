@@ -60,11 +60,10 @@ $BASE_URL = constant('URL') . "public";
                                             <div class="input-group">
                                                 <select
                                                     class="form-select <?php echo intval($claim['status']) === 0 ? 'select-entregado' : (intval($claim['status']) === 1 ? 'select-cancelado' : ''); ?>"
-                                                    name="status" id="status">
+                                                    name="status" id="statusClaims">
                                                     <option value="0" <?php echo intval($claim['status']) === 0 ? 'selected' : ''; ?>>Pendiente</option>
                                                     <option value="1" <?php echo intval($claim['status']) === 1 ? 'selected' : ''; ?>>Finalizado</option>
                                                 </select>
-                                                <button class="button-orders" type="submit">Guardar</button>
                                             </div>
                                         </form>
                                     </td>
@@ -83,7 +82,15 @@ $BASE_URL = constant('URL') . "public";
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"></script>
+        <script>
+            const selectElements = document.querySelectorAll('#statusClaims');
 
+            selectElements.forEach((selectElement) => {
+                selectElement.addEventListener('change', function () {
+                    this.closest('form').submit();
+                });
+            });
+        </script>
 </body>
 
 </html>
