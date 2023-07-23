@@ -21,7 +21,7 @@ class productsModel extends Model
                     IF(COUNT(pf.product_id) > 0, true, false) AS isFav
                 FROM products p 
                 LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
-                WHERE p.status = 1' . ' ' . $sWhere . ' GROUP BY p.product_id ' . $sOrder;
+                WHERE p.status = 1 AND p.isDelete = 0' . ' ' . $sWhere . ' GROUP BY p.product_id ' . $sOrder;
             $query = $this->db->connect()->prepare($querySQL);
             $query->execute([
                 'userID'=> $userID
@@ -59,7 +59,7 @@ class productsModel extends Model
                     IF(COUNT(pf.product_id) > 0, true, false) AS isFav
                 FROM products p 
                 LEFT JOIN products_favs pf ON pf.product_id = p.product_id AND pf.user_id = :userID
-                WHERE p.status = 1 GROUP BY p.product_id LIMIT 3;
+                WHERE p.status = 1 AND p.isDelete = 0 GROUP BY p.product_id LIMIT 3;
                 '
             );
             $query->execute([
@@ -98,7 +98,7 @@ class productsModel extends Model
                         p.product_id, p.title, p.description, p.urllmage, p.price, p.stock, p.status, p.updated, p.created
                     FROM products_favs pf
                     INNER JOIN products p on p.product_id = pf.product_id
-                    WHERE p.status = 1 and pf.user_id = :userID;
+                    WHERE p.status = 1 AND pf.user_id = :userID AND p.isDelete = 0;
                 '
             );
             $query->execute([
@@ -131,7 +131,7 @@ class productsModel extends Model
     {
 
         try {
-            $query = $this->db->connect()->prepare('SELECT * FROM products WHERE product_id = :id;');
+            $query = $this->db->connect()->prepare('SELECT * FROM products WHERE product_id = :id AND isDelete = 0;');
             $query->execute(['id' => $id]);
             $arr_products = array();
             while ($row = $query->fetch()) {
@@ -209,7 +209,7 @@ class productsModel extends Model
     public function deleteProducts($idProduct)
     {
         try {
-            $query = $this->db->connect()->prepare('DELETE FROM products WHERE product_id = :id');
+            $query = $this->db->connect()->prepare('UPDATE products SET isDelete = 1 WHERE product_id = :id');
             $query->execute([
                 'id' => $idProduct
             ]);

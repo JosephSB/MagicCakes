@@ -10,7 +10,7 @@ class productsAdminModel extends Model
     public function getProductsAdmin()
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT * FROM products;');
+            $query = $this->db->connect()->prepare('SELECT * FROM products WHERE isDelete = 0;');
             $query->execute();
             $products = array();
             while ($row = $query->fetch()) {

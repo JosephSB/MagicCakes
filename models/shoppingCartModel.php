@@ -16,7 +16,7 @@ class shoppingCartModel extends Model
                     p.created, sc.user_owner, sc.ammount, sc.id as itemID, sc.createdAt as itemDate
                 FROM shopping_cart sc 
                 INNER JOIN products p on (p.product_id = sc.item_id)
-                WHERE p.status = 1 and sc.user_owner = :userID
+                WHERE p.status = 1 AND p.isDelete = 0 AND sc.user_owner = :userID
             ';
             $query = $this->db->connect()->prepare($querySQL);
             $query->execute([
@@ -53,7 +53,7 @@ class shoppingCartModel extends Model
 	                count(*) as total
                 FROM shopping_cart sc 
                 INNER JOIN products p on (p.product_id = sc.item_id)
-                WHERE p.status = 1 and sc.user_owner = :userID
+                WHERE p.status = 1 AND p.isDelete = 0 AND sc.user_owner = :userID
             ';
             $query = $this->db->connect()->prepare($querySQL);
             $query->execute([
