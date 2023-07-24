@@ -72,9 +72,9 @@ class homeModel extends Model
 
 
     public function getProductSell($month)
-{
-    try {
-        $query = $this->db->connect()->prepare('
+    {
+        try {
+            $query = $this->db->connect()->prepare('
         SELECT 
         p.title, 
         p.urllmage, 
@@ -88,43 +88,53 @@ class homeModel extends Model
         GROUP BY p.title, p.urllmage, p.description
         ORDER BY total_ventas DESC;
         ');
-        $query->bindParam(':month', $month, PDO::PARAM_INT);
-        $query->execute();
+            $query->bindParam(':month', $month, PDO::PARAM_INT);
+            $query->execute();
 
-        $productsSell = [];
-        while ($row = $query->fetch()) {
-            $produtcssell = [
-                'title' => $row['title'],
-                'urllmage' => $row['urllmage'],
-                'description' => $row['description'],
-                'total_ventas' => $row['total_ventas'],
-            ];
-            array_push($productsSell, $produtcssell);
+            $productsSell = [];
+            while ($row = $query->fetch()) {
+                $produtcssell = [
+                    'title' => $row['title'],
+                    'urllmage' => $row['urllmage'],
+                    'description' => $row['description'],
+                    'total_ventas' => $row['total_ventas'],
+                ];
+                array_push($productsSell, $produtcssell);
+            }
+            return $productsSell;
+        } catch (PDOException $e) {
+            //echo $e
+            return [];
         }
-        return $productsSell;
-    } catch (PDOException $e) {
-        //echo $e
-        return [];
     }
-}
-public function getSaleDayMonths() {
-    try {
-        $result = [];  // Arreglo para almacenar los resultados
-        $query = $this->db->connect()->prepare("SELECT DATE_FORMAT(created, '%Y-%m-%d') AS dia, MONTH(created) AS mes, SUM(totalGrossPrice) AS ventas_diarias FROM orders WHERE YEAR(created) = YEAR(CURRENT_DATE()) GROUP BY dia, mes ORDER BY dia DESC LIMIT 10");
-        $query->execute();
-        while ($row = $query->fetch()) {
-            $result[] = [
-                //'dia' => $row['dia'],
-                'mes' => $row['mes'],
-                'ventas_diarias' => $row['ventas_diarias']
-            ];
+    public function getSaleDayMonths()
+    {
+        try {
+            $result = [];  // Arreglo para almacenar los resultados
+            $query = $this->db->connect()->prepare(
+            '
+                SELECT 
+                    MONTH(created) AS mes, 
+                    SUM(totalGrossPrice) AS ventas_diarias 
+                FROM orders 
+                WHERE YEAR(created) = YEAR(CURRENT_DATE()) 
+                GROUP BY  mes 
+                ORDER BY mes ASC 
+                LIMIT 10
+            '
+            );
+            $query->execute();
+            while ($row = $query->fetch()) {
+                $result[] = [
+                    //'dia' => $row['dia'],
+                    'mes' => $row['mes'],
+                    'ventas_diarias' => $row['ventas_diarias']
+                ];
+            }
+            return $result;  // Devolver el arreglo con los resultados
+        } catch (PDOException $e) {
+            //echo $e;
+            return 0;
         }
-        return $result;  // Devolver el arreglo con los resultados
-    } catch (PDOException $e) {
-        //echo $e;
-        return 0;
     }
-}
-
-
 }

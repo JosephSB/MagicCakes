@@ -50,7 +50,7 @@ const chart = new Chart(ctx, {
         plugins: {
             title: {
                 display: true,
-                text: `VENTAS MENSUALES DEL AÑO ${new Date().getFullYear()}`,
+                text: `VENTAS DE CADA MES DEL AÑO ${new Date().getFullYear()}`,
                 position: 'top',
                 font: {
                     size: 16,
